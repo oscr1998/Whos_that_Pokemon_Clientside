@@ -1,7 +1,8 @@
 import React from 'react'
+import './style.css'
 
 export default function Timer() {
   return (
-    <div>Timer</div>
+    <div className='Timer'>Timer</div>
   )
 }

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { NavLink, useNavigate } from 'react-router-dom';
+import './style.css'
 
 import io from "socket.io-client"
 import { setRoom } from '../../Actions';
@@ -88,7 +89,7 @@ export default function Home() {
   }, []);
 
   return (
-    <div>
+    <div className='Home'>
       <div>
         <form name="createRoom" onSubmit={createRoom}>
           <label>
