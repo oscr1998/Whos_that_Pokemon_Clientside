@@ -9,8 +9,9 @@ export default function App() {
       <Routes>
         <Route path="/" element={<Home/>}/>
         <Route path="/leaderboard" element={<Leaderboard/>}/>
-        <Route path="/lobby" element={<Lobby/>}/>
+        <Route path="/:roomCode" element={<Lobby/>}/>
         <Route path="/game" element={<Game/>}/>
+        {/* <Route path="*" element={<Error404/>}/> */}
       </Routes>
     </div>
   )

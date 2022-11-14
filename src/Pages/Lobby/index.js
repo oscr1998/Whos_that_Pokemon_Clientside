@@ -1,12 +1,17 @@
 import React from 'react'
 import { PlayerCard } from '../../Components'
-import { NavLink } from 'react-router-dom';
+import { NavLink, useParams } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 export default function Lobby() {
+  const { roomCode } = useParams()
+
+  const users = useSelector(state => state.users)
+
   return (
     <div>
       <div>
-        <div>Room Code: </div>
+        <div>Room Code: {roomCode} </div>
 
         <div>
           <label>Choose Pokemon Generation:</label>
@@ -31,7 +36,9 @@ export default function Lobby() {
 
       <div>
         <h1>Players:</h1>
-        <PlayerCard/>
+        {
+          users.map(user => <PlayerCard/>)
+        }
       </div>
 
       <NavLink to="/game">START GAME</NavLink>
