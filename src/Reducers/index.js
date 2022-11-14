@@ -23,6 +23,7 @@ export default function reducer(state = initState, action){
             room = state.room
             room.code = code
             room.host = name
+            room.users.push(name)
 
             return {...state, room, isHost }
         case "ADD_USER":

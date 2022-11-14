@@ -1,10 +1,10 @@
 import React from 'react'
 
-export default function PlayerCard() {
+export default function PlayerCard({name}) {
   return (
     <div>
-        <img src="" alt="Player Avatar"></img>
-        <h3>User</h3>
+        <img src="" alt="Player avatar"></img>
+        <h3>{name}</h3>
     </div>
   )
 }

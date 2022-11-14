@@ -6,7 +6,7 @@ import { useSelector } from 'react-redux';
 export default function Lobby() {
   const { roomCode } = useParams()
 
-  const users = useSelector(state => state.users)
+  const room = useSelector(state => state.room)
 
   return (
     <div>
@@ -30,14 +30,14 @@ export default function Lobby() {
 
         <div>
           <label>Number of rounds?:</label>
-          <input type="number" defaultValue={10}></input>
+          <input type="number" defaultValue={10} min='1' max='10'></input>
         </div>
       </div>
 
       <div>
         <h1>Players:</h1>
         {
-          users.map(user => <PlayerCard/>)
+          room.users.map(user => <PlayerCard key={user} name={user}/>)
         }
       </div>
 
