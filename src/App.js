@@ -8,6 +8,7 @@ export default function App() {
 
   return (
     <div className='App'>
+
       <img className="title" src={title} alt="whos that pokemon title"></img>
       <div className="circlesContainer">
         <img className="circles" src={pokeball} alt="pokeball"></img>
@@ -23,10 +24,11 @@ export default function App() {
       <Routes>
         <Route path="/" element={<Home/>}/>
         <Route path="/leaderboard" element={<Leaderboard/>}/>
-        <Route path="/room/:roomCode" element={<Lobby/>}/>
+        <Route path="/rooms/:roomCode" element={<Lobby/>}/>
         <Route path="/game" element={<Game/>}/>
         <Route path="*" element={<NotFound/>}/>
       </Routes>
+      
     </div>
   )
 }

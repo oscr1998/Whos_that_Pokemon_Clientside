@@ -50,7 +50,7 @@ export default function Home() {
     console.log({username, room, isHost});
     
     // navigate to lobby for the new room
-    navigate(`/${roomCode}`)
+    navigate(`/rooms/${roomCode}`)
   }
   
   function joinRoom(e) {
@@ -65,7 +65,7 @@ export default function Home() {
 
     // Connect to room
     console.log("Connecting to", data.roomCode);
-    navigate(`/${data.roomCode}`)
+    navigate(`/rooms/${data.roomCode}`)
   }
 
   useEffect(() => {
