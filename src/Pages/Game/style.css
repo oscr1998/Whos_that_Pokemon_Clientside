@@ -2,6 +2,7 @@
     visibility: visible;
 }
 
-.filteredImg{
+#filteredImg{
     filter: brightness(0%);
+    pointer-events: none;
 }
