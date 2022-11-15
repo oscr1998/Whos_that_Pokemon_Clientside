@@ -1,3 +1,12 @@
+body{
+	background-image: url("./Components/images/bg.png");
+	background-size: 100% 100%;
+	background-repeat: no-repeat;
+	height: 100vh;
+    padding:0;
+    margin:0;
+}
+
 /*############################# Animated Pokeballs ##########################*/
 .circlesContainer {
 	position: absolute;
@@ -15,7 +24,7 @@
 	width: 20px;
 	height: 20px;
 	animation: animate 25s linear infinite;
-	bottom: calc(-150px - 40vh);
+	bottom: 0px;
 }
 
 .circles:nth-child(1) {
@@ -128,7 +137,10 @@
 /* ###################### */
 .title{
 	width: 40%;
+	margin-top: 2%;
 	margin-left: auto;
 	margin-right: auto;
 	display: block;
 }
+
+

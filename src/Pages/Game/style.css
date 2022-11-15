@@ -1,3 +1,7 @@
 .Game {
     visibility: visible;
 }
+
+.filteredImg{
+    filter: brightness(0%);
+}

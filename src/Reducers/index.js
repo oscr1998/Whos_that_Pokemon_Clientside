@@ -22,7 +22,6 @@ export default function reducer(state = initState, action){
             return {...state, room: action.payload}
         case "STORE_USER":
             return {...state, users: action.payload}
-
         case "SET_ROOM":
             const {code, name, isHost} = action.payload
 

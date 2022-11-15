@@ -158,19 +158,23 @@ export default function Home() {
 
   return (
     <div className='Home'>
-      <div>
-        <form name="createRoom" onSubmit={createRoom}>
-          <label>
-            Name
-            <input type="text" placeholder='Enter a name' name='name' defaultValue={username} required></input>
-          </label>
-          <button>Create Room</button>
-        </form>
-        
+
+      {room.code && <p>Already in a room. <a href='#'>Leave room {room.code}</a></p>}
+      <div className = "formContainer">
+        <div className='form1 smallContainer'>
+          <form name="createRoom" onSubmit={createRoom}>
+            <label>
+              Name
+              <input type="text" placeholder='Enter a Name' name='name' required className="inputField"></input>
+            </label>
+            <button>Create Room</button>
+          </form>
+        </div>
+        <div className='form2 smallContainer'>
         <form name="joinRoom" onSubmit={joinRoom}>
           <label>
             Room code
-            <input type="text" placeholder='Enter room code' name='roomCode' defaultValue={room.code} required></input>
+            <input type="text" placeholder='Enter room code' name='roomCode' required className="inputField"></input>
           </label>
           <label>
             Name
@@ -178,11 +182,15 @@ export default function Home() {
           </label>
           <input type="submit" value="Join"></input>
         </form>
+        </div>
       </div>
 
       <div>
         <NavLink to="/leaderboard">Leaderboard</NavLink>
       </div>
+
+      {/* ###################### */}
+      
     </div>
   )
 }
