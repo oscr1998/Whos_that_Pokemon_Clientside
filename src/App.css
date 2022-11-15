@@ -124,3 +124,11 @@
 		opacity: 0;
 	}
 }
+
+/* ###################### */
+.title{
+	width: 40%;
+	margin-left: auto;
+	margin-right: auto;
+	display: block;
+}
