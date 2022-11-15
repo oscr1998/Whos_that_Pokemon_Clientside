@@ -1,9 +1,10 @@
 import React from 'react'
 import { Podium } from '../../Components'
+import './style.css'
 
 export default function Winner() {
   return (
-    <div>
+    <div className='Winner'>
       <div>
         <h1>MACHAMPION:</h1>
 

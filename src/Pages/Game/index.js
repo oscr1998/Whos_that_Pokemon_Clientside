@@ -1,9 +1,10 @@
 import React from 'react'
 import { Timer, Choices } from '../../Components'
+import './style.css'
 
 export default function Game() {
   return (
-    <div>
+    <div className='Game'>
       <Timer/>
       <div className='ImgContainer'>
         <img src=''></img>

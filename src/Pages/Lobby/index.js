@@ -2,6 +2,7 @@ import React from 'react'
 import { PlayerCard } from '../../Components'
 import { NavLink, useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
+import './style.css'
 
 export default function Lobby() {
   const { roomCode } = useParams()
@@ -9,7 +10,7 @@ export default function Lobby() {
   const room = useSelector(state => state.room)
 
   return (
-    <div>
+    <div className='Lobby'>
       <div>
         <div>Room Code: {roomCode} </div>
 

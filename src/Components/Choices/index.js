@@ -1,7 +1,8 @@
 import React from 'react'
+import './style.css'
 
 export default function Choices() {
   return (
-    <div>Choices</div>
+    <div className='Choices'>Choices</div>
   )
 }

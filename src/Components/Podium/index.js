@@ -1,7 +1,8 @@
 import React from 'react'
+import './style.css'
 
 export default function Podium() {
   return (
-    <div>Podium</div>
+    <div className='Podium'>Podium</div>
   )
 }
