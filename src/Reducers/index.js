@@ -1,5 +1,6 @@
 const initState = {
     username: "",
+    icon: "",
     room: {
         code: "",
         name: "",
@@ -33,10 +34,8 @@ export default function reducer(state = initState, action){
             return updatedData
 
         case "ADD_USER":
-            const newUser = action.payload
-            room = state.room
-            room.users.push(newUser)
-            return {...state, room }
+            const {newUser, newIcon} = action.payload
+            return {...state, username: newUser, icon: newIcon }
         default:
             return state
     }

@@ -4,8 +4,8 @@ export const setRoom = (code, name, isHost) => {
 }
 
 // Adds user to the room we are in
-export const addUser = userId => {
-    return {type: "ADD_USER", payload: userId}
+export const addUser = (newUser, newIcon) => {
+    return {type: "ADD_USER", payload: {newUser, newIcon}}
 }
 
 export const createRoom = roomId => {
