@@ -11,50 +11,35 @@ const initState = {
     isHost: false
 }
 
-const setLocalStorage = (key, value) => window.localStorage.setItem(key, JSON.stringify(value))
-
 export default function reducer(state = initState, action){
-    let room
     switch(action.type){
-
-        case "SET_USERNAME":
-            return { ...state, username: action.payload }
-
         case "LOAD_DATA":
             return {...state, ...action.payload}
 
+        case "CLEAR_DATA":
+            return initState
 
+        case "SET_USERNAME":
+            console.log("SET_USERNAME", action.payload);
+            return { ...state, username: action.payload }
 
-        case "STORE_ROOM":
-            return {...state, room: action.payload}
-        case "STORE_USER":
-            return {...state, users: action.payload}
-        case "SET_ROOM":
-            const {code, name, isHost} = action.payload
+        case "SET_ICON":
+            return { ...state, icon: action.payload }
 
-            room = state.room
-            room.code = code
+        case "CREATE_ROOM":
+            console.log("CREATE_ROOM");
+            return { ...state, room: { ...state.room, host: state.username }, isHost: true }
 
-            if(isHost)
-                room.host = name
-            
-            room.users.push(name)
-            
-            const updatedData = {...state, username: name, room, isHost}
-            setLocalStorage('data', updatedData)
-            return updatedData
+        case "JOIN_ROOM":
+            const users = state.room.users
+            users.push(state.username)
+
+            console.log("JOIN_ROOM", JSON.stringify(action.payload));
+            return { ...state, room: { ...state.room, code: action.payload, users }}
 
         case "LEAVE_ROOM":
-            const leaveRoomState = {...state, room: initState.room}
-            setLocalStorage('data', leaveRoomState)
-            return {...state, leaveRoomState}
+            return {...state, room: initState.room, isHost: false }
 
-        case "ADD_USER":
-            const {newUser, newIcon} = action.payload
-            return {...state, username: newUser, icon: newIcon }
-        case "ROUND_AMOUNT":
-            const {newRoundAmount} = action.payload
-            return {...state, roundAmount : newRoundAmount}
         default:
             return state
     }

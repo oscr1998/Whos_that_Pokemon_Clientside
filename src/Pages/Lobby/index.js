@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { PlayerCard } from '../../Components'
-import { NavLink, useParams } from 'react-router-dom';
+import { NavLink, useNavigate, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { loadData } from '../../Actions';
 import './style.css'
@@ -13,6 +13,7 @@ export default function Lobby() {
   const isHost = useSelector(state => state.isHost)
 
   const dispatch = useDispatch()
+  const navigate = useNavigate()
 
   useEffect(() => {
     // Get local storage and store state
@@ -25,11 +26,14 @@ export default function Lobby() {
       setLocalStorage(localStorageData)
     }
 
+    console.log(room);
+
     // If local storage is different from redux state
   }, [])
 
-  return (code === room.code || localStorage?.room.code === code) ? (
+  // return (code === room.code || localStorage?.room.code === code) ? (
   // return (
+  return (room.code === code) ? (
     <div className='Lobby'>
       <div>
         <div>Room {code} ({room.host} is host) </div>
@@ -68,6 +72,7 @@ export default function Lobby() {
   : (
     <div>
       Wrong room! Are you looking for room {room.code}
+      <button onClick={() => navigate('/')}>&larr; Go back home</button>
     </div>
   )
 }
