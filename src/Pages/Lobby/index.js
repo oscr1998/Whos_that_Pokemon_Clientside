@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import { PlayerCard } from '../../Components'
 import { NavLink, useParams } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { loadData } from '../../Actions';
 import './style.css'
 
 export default function Lobby() {
@@ -11,13 +12,18 @@ export default function Lobby() {
   const room = useSelector(state => state.room)
   const isHost = useSelector(state => state.isHost)
 
-  useEffect(() => {
-    console.log(room, isHost);
+  const dispatch = useDispatch()
 
-    // Get user's data from local storage
-    const data = JSON.parse(window.localStorage.getItem('data'))
-    console.log('From local storage:', data);
-    setLocalStorage(data)
+  useEffect(() => {
+    // Get local storage and store state
+    const localStorageData = JSON.parse(window.localStorage.getItem('data'))
+
+    if(localStorageData){
+      // Use local storage as source of truth
+      // Maybe replace with backend database in the future
+      dispatch(loadData(localStorageData))
+      setLocalStorage(localStorageData)
+    }
 
     // If local storage is different from redux state
   }, [])
@@ -26,7 +32,7 @@ export default function Lobby() {
   // return (
     <div className='Lobby'>
       <div>
-        <div>Room Code: {code} </div>
+        <div>Room {code} ({room.host} is host) </div>
 
         <div>
           <label>Choose Pokemon Generation:</label>

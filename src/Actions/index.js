@@ -17,6 +17,10 @@ export const createRoom = roomId => {
     return {type: "STORE_ROOM", payload: roomId}
 }
 
+export const leaveRoom = () => {
+    return {type: "LEAVE_ROOM", payload: null}
+}
+
 export const createUser = user => {
     return {type: "STORE_USER", payload: user}
 }
