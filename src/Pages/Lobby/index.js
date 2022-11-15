@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { PlayerCard } from '../../Components'
 import { NavLink, useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
@@ -6,14 +6,23 @@ import './style.css'
 
 export default function Lobby() {
   const { roomCode } = useParams()
+  const [localStorage, setLocalStorage] = useState(null)
 
   const room = useSelector(state => state.room)
+  const isHost = useSelector(state => state.isHost)
 
   useEffect(() => {
-    console.log(room);
+    console.log(room, isHost);
+
+    // Get user's data from local storage
+    const data = JSON.parse(window.localStorage.getItem('data'))
+    console.log('From local storage:', data);
+    setLocalStorage(data)
+
+    // If local storage is different from redux state
   }, [])
 
-  return (roomCode === room.code) ? (
+  return (roomCode === room.code || localStorage?.room.code === roomCode) ? (
   // return (
     <div className='Lobby'>
       <div>

@@ -1,29 +1,28 @@
 import React, { useEffect, useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux';
-import { NavLink, useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux'
+import { NavLink, useNavigate } from 'react-router-dom'
 import './style.css'
 
 import io from "socket.io-client"
-import { setRoom } from '../../Actions';
-const serverEndpoint = "http://127.0.0.1:5001";
-const socket = io(serverEndpoint);
+import { setRoom } from '../../Actions'
+const serverEndpoint = "http://127.0.0.1:5001"
+const socket = io(serverEndpoint)
 
-const getFormData = (form) => Object.fromEntries(new FormData(form))
+const getFormData = form => Object.fromEntries(new FormData(form))
+const generateId = length => {
+  const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'
+  const charactersLength = characters.length
 
-function makeid(length) {
-  var result           = '';
-  var characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-  var charactersLength = characters.length;
-  for ( var i = 0; i < length; i++ ) {
-      result += characters.charAt(Math.floor(Math.random() * charactersLength));
-  }
-  return result;
+  let result = ''
+  for (let i = 0; i < length; i++)
+      result += characters.charAt(Math.floor(Math.random() * charactersLength))
+
+  return result
 }
 
 export default function Home() {
-  // const [socket, setSocket] = useState(null)
   const [isConnected, setIsConnected] = useState(socket.isConnected)
-  const [inRoom, setInRoom] = useState(null)
+  const [localStorage, setLocalStorage] = useState(null)
   const navigate = useNavigate()
 
   const username = useSelector(state => state.username)
@@ -37,7 +36,7 @@ export default function Home() {
     const data = getFormData(e.target)
 
     // generate a room code
-    const roomCode = makeid(5).toUpperCase()
+    const roomCode = generateId(5).toUpperCase()
 
     // Send room code to socket to store it
     // return isUnique
@@ -69,6 +68,9 @@ export default function Home() {
   }
 
   useEffect(() => {
+    setLocalStorage(JSON.parse(window.localStorage.getItem('data')))
+    console.log('From local storage:', localStorage)
+
     console.log({username, room, isHost});
     socket.on('admin-message', (msg) => {
       console.log(msg);
@@ -90,6 +92,9 @@ export default function Home() {
 
   return (
     <div className='Home'>
+      {
+        localStorage?.username && <p>{localStorage.username}</p>
+      }
 
       {room.code && <p>Already in a room. <a href='#'>Leave room {room.code}</a></p>}
 

@@ -10,6 +10,8 @@ const initState = {
     isHost: false
 }
 
+const setLocalStorage = (key, value) => window.localStorage.setItem(key, JSON.stringify(value))
+
 export default function reducer(state = initState, action){
     let room
     switch(action.type){
@@ -20,12 +22,16 @@ export default function reducer(state = initState, action){
 
         case "SET_ROOM":
             const {code, name, isHost} = action.payload
+
             room = state.room
             room.code = code
             room.host = name
             room.users.push(name)
+            
+            const updatedData = {...state, username: name, room, isHost}
+            setLocalStorage('data', updatedData)
+            return updatedData
 
-            return {...state, room, isHost }
         case "ADD_USER":
             const newUser = action.payload
             room = state.room
