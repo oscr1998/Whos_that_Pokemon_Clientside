@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { PlayerCard } from '../../Components'
 import { NavLink, useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
@@ -9,7 +9,12 @@ export default function Lobby() {
 
   const room = useSelector(state => state.room)
 
-  return (
+  useEffect(() => {
+    console.log(room);
+  }, [])
+
+  return (roomCode === room.code) ? (
+  // return (
     <div className='Lobby'>
       <div>
         <div>Room Code: {roomCode} </div>
@@ -43,6 +48,11 @@ export default function Lobby() {
       </div>
 
       <NavLink to="/game">START GAME</NavLink>
+    </div>
+  ) 
+  : (
+    <div>
+      Wrong room! Are you looking for room {room.code}
     </div>
   )
 }

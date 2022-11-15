@@ -7,15 +7,15 @@ export default function App() {
 
   return (
     <div className='App'>
-      <div class="circlesContainer">
-        <img class="circles" src={pokeball} alt="pokeball"></img>
-        <img class="circles" src={pokeball} alt="pokeball"></img>
-        <img class="circles" src={pokeball} alt="pokeball"></img>
-        <img class="circles" src={pokeball} alt="pokeball"></img>
-        <img class="circles" src={pokeball} alt="pokeball"></img>
-        <img class="circles" src={pokeball} alt="pokeball"></img>
-        <img class="circles" src={pokeball} alt="pokeball"></img>
-        <img class="circles" src={pokeball} alt="pokeball"></img>
+      <div className="circlesContainer">
+        <img className="circles" src={pokeball} alt="pokeball"></img>
+        <img className="circles" src={pokeball} alt="pokeball"></img>
+        <img className="circles" src={pokeball} alt="pokeball"></img>
+        <img className="circles" src={pokeball} alt="pokeball"></img>
+        <img className="circles" src={pokeball} alt="pokeball"></img>
+        <img className="circles" src={pokeball} alt="pokeball"></img>
+        <img className="circles" src={pokeball} alt="pokeball"></img>
+        <img className="circles" src={pokeball} alt="pokeball"></img>
       </div>
       
       <Routes>

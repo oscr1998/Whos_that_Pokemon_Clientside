@@ -90,6 +90,9 @@ export default function Home() {
 
   return (
     <div className='Home'>
+
+      {room.code && <p>Already in a room. <a href='#'>Leave room {room.code}</a></p>}
+
       <div>
         <form name="createRoom" onSubmit={createRoom}>
           <label>
