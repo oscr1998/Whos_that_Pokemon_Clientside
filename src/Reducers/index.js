@@ -16,6 +16,8 @@ const setLocalStorage = (key, value) => window.localStorage.setItem(key, JSON.st
 export default function reducer(state = initState, action){
     let room
     switch(action.type){
+        case "LOAD_DATA":
+            return {...state, ...action.payload}
         case "STORE_ROOM":
             return {...state, room: action.payload}
         case "STORE_USER":

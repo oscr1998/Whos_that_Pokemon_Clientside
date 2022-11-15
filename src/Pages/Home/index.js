@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { NavLink, useNavigate } from 'react-router-dom';
-import { setRoom, addUser } from '../../Actions';
+import { loadData, setRoom, addUser } from '../../Actions';
 
 import './style.css'
 import io from "socket.io-client"
@@ -53,13 +53,13 @@ const generateId = length => {
 export default function Home() {
   const [isConnected, setIsConnected] = useState(socket.isConnected)
   const [localStorage, setLocalStorage] = useState(null)
-  const navigate = useNavigate()
 
   const username = useSelector(state => state.username)
   const room = useSelector(state => state.room)
   const isHost = useSelector(state => state.isHost)
   const icon = useSelector(state => state.icon)
 
+  const navigate = useNavigate()
   const dispatch = useDispatch()
 
   function createRoom(e) {
@@ -110,10 +110,19 @@ export default function Home() {
   }
 
   useEffect(() => {
-    setLocalStorage(JSON.parse(window.localStorage.getItem('data')))
-    console.log('From local storage:', localStorage)
+    // Get local storage and store state
+    const localStorageData = JSON.parse(window.localStorage.getItem('data'))
 
-    console.log({username, room, isHost});
+    if(localStorageData){
+      // Use local storage as source of truth
+      // Maybe replace with backend database in the future
+      dispatch(loadData(localStorageData))
+      setLocalStorage(localStorageData)
+    }
+
+    console.log('From local storage:', localStorageData)
+    console.log('Current state:', {username, icon, room, isHost});
+
     socket.on('admin-message', (msg) => {
       console.log(msg);
     })
@@ -132,20 +141,23 @@ export default function Home() {
     };
   }, []);
 
+  if(localStorage){
+    return (<div>
+      Hello {username}! You're already in room {room.code}.
+
+      <button>Rejoin</button>
+      <button>Leave</button>
+    </div>)
+  }
 
 
   return (
     <div className='Home'>
-      {
-        localStorage?.username && <p>{localStorage.username}</p>
-      }
-
-      {room.code && <p>Already in a room. <a href='#'>Leave room {room.code}</a></p>}
       <div>
         <form name="createRoom" onSubmit={createRoom}>
           <label>
             Name
-            <input type="text" placeholder='Enter a name' name='name' required></input>
+            <input type="text" placeholder='Enter a name' name='name' defaultValue={username} required></input>
           </label>
           <button>Create Room</button>
         </form>
@@ -153,11 +165,11 @@ export default function Home() {
         <form name="joinRoom" onSubmit={joinRoom}>
           <label>
             Room code
-            <input type="text" placeholder='Enter room code' name='roomCode' required></input>
+            <input type="text" placeholder='Enter room code' name='roomCode' defaultValue={room.code} required></input>
           </label>
           <label>
             Name
-            <input type="text" placeholder='Enter a name' name='name' required></input>
+            <input type="text" placeholder='Enter a name' name='name' defaultValue={username} required></input>
           </label>
           <input type="submit" value="Join"></input>
         </form>
