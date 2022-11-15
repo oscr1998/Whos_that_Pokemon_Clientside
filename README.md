@@ -55,4 +55,5 @@ Once installed, run the following commands with `npm run`. For example, to run t
 
 
 ## Links
+* [Who's That Pokemon?](https://kakuna-matata.netlify.app) - The App hosted on netlify
 * [LAP 3 Portfolio Week Project](https://gist.github.com/getfutureproof-admin/521aa21341468693326842e63db80fe2) - The project brief
