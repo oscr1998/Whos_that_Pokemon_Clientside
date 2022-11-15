@@ -5,7 +5,7 @@ import { useSelector } from 'react-redux';
 import './style.css'
 
 export default function Lobby() {
-  const { roomCode } = useParams()
+  const { code } = useParams()
   const [localStorage, setLocalStorage] = useState(null)
 
   const room = useSelector(state => state.room)
@@ -22,11 +22,11 @@ export default function Lobby() {
     // If local storage is different from redux state
   }, [])
 
-  return (roomCode === room.code || localStorage?.room.code === roomCode) ? (
+  return (code === room.code || localStorage?.room.code === code) ? (
   // return (
     <div className='Lobby'>
       <div>
-        <div>Room Code: {roomCode} </div>
+        <div>Room Code: {code} </div>
 
         <div>
           <label>Choose Pokemon Generation:</label>

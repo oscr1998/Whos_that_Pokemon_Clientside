@@ -103,7 +103,7 @@ export default function Home() {
     // assign Icon
     let randomInt = Math.floor(Math.random()*playerIcons.length)
     dispatch(addUser(data.name, playerIcons[randomInt]))
-    
+
     dispatch(setRoom(data.roomCode, data.name, false))
 
     navigate(`/rooms/${data.roomCode}`)
@@ -141,7 +141,6 @@ export default function Home() {
       }
 
       {room.code && <p>Already in a room. <a href='#'>Leave room {room.code}</a></p>}
-      <img src={icon0} alt="icon"></img>
       <div>
         <form name="createRoom" onSubmit={createRoom}>
           <label>

@@ -11,20 +11,15 @@ export default function App() {
 
       <img className="title" src={title} alt="whos that pokemon title"></img>
       <div className="circlesContainer">
-        <img className="circles" src={pokeball} alt="pokeball"></img>
-        <img className="circles" src={pokeball} alt="pokeball"></img>
-        <img className="circles" src={pokeball} alt="pokeball"></img>
-        <img className="circles" src={pokeball} alt="pokeball"></img>
-        <img className="circles" src={pokeball} alt="pokeball"></img>
-        <img className="circles" src={pokeball} alt="pokeball"></img>
-        <img className="circles" src={pokeball} alt="pokeball"></img>
-        <img className="circles" src={pokeball} alt="pokeball"></img>
+        {
+          Array(10).fill().map((i, index) => (<img key={index} className="circles" src={pokeball} alt="pokeball"></img>))
+        }
       </div>
       
       <Routes>
         <Route path="/" element={<Home/>}/>
         <Route path="/leaderboard" element={<Leaderboard/>}/>
-        <Route path="/rooms/:roomCode" element={<Lobby/>}/>
+        <Route path="/rooms/:code" element={<Lobby/>}/>
         <Route path="/game" element={<Game/>}/>
         <Route path="*" element={<NotFound/>}/>
       </Routes>
