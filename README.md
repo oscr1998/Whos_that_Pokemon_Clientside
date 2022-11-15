@@ -20,7 +20,11 @@ We were tasked with creating a multiplayer online quiz game, using React. We dec
 - Make use of an open API such as [Open Trivia DB](https://opentdb.com/api_config.php).
 - Minimum 60% test coverage with an aim of 80%.
 
-## Usage
+## Game Instructions
+* Open browser
+* Guess Pokemon
+
+## Development Instructions
 Install packages with `npm install`
 
 Once installed, run the following commands with `npm run`. For example, to run the development script, use `npm run dev`.
@@ -38,7 +42,7 @@ Once installed, run the following commands with `npm run`. For example, to run t
 ## Testing
 * Coverage:
 
-[Insert image here]
+![](./media/wtpq-testCoverage.png)
 
 ## Wins & Challenges
 

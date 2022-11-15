@@ -1,5 +1,5 @@
 import React from 'react'
-import {Home, Leaderboard, Lobby, Game} from './Pages'
+import {Home, Leaderboard, Lobby, Game, NotFound} from './Pages'
 import {Routes, Route} from 'react-router-dom'
 import pokeball from './Components/images/pokeball.svg'
 import title from './Components/images/Who.png'
@@ -23,9 +23,9 @@ export default function App() {
       <Routes>
         <Route path="/" element={<Home/>}/>
         <Route path="/leaderboard" element={<Leaderboard/>}/>
-        <Route path="/:roomCode" element={<Lobby/>}/>
+        <Route path="/room/:roomCode" element={<Lobby/>}/>
         <Route path="/game" element={<Game/>}/>
-        {/* <Route path="*" element={<Error404/>}/> */}
+        <Route path="*" element={<NotFound/>}/>
       </Routes>
     </div>
   )
