@@ -83,14 +83,18 @@ function checkAnswer(e){
   let button2 = document.getElementById("2")
   let button3 = document.getElementById("3")
   let button4 = document.getElementById("4")
+  let pokeImg = document.getElementById("filteredImg")
   button1.disabled = true;
   button2.disabled = true;
   button3.disabled = true;
   button4.disabled = true;
+  pokeImg.style.filter= "brightness(100%)"
   if(e.target.value == spriteName){
     let button = document.getElementById(e.target.id)
     button.style.backgroundColor = "green"
   } else{
+    let button = document.getElementById(e.target.id)
+    button.style.backgroundColor = "red"
   }
 }
 // gives points to user
@@ -107,7 +111,7 @@ function checkAnswer(e){
     <div className='Game'>
       <script src="jquery-1.6.1.js"></script>
       <script src="my_jquery.js"></script>
-      <img className="filteredImg" src={sprite}></img>
+      <img id="filteredImg" src={sprite}></img>
       <Timer/>
       <div className='ImgContainer'>
         <img src=''></img>
