@@ -1,3 +1,7 @@
+export const setUsername = (name) => {
+    return { type: "SET_USERNAME", payload: name }
+}
+
 // Loads all data into redux state
 export const loadData = (data) => {
     return {type: "LOAD_DATA", payload: data}

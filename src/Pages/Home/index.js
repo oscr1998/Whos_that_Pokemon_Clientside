@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { NavLink, useNavigate } from 'react-router-dom';
 import { loadData, setRoom, leaveRoom, addUser } from '../../Actions';
+import { setUsername } from '../../Actions'
 
 import './style.css'
 import io from "socket.io-client"
@@ -53,6 +54,7 @@ const generateId = length => {
 export default function Home() {
   const [isConnected, setIsConnected] = useState(socket.isConnected)
   const [localStorage, setLocalStorage] = useState(null)
+  const [inRoom, setInRoom] = useState(false)
 
   const username = useSelector(state => state.username)
   const room = useSelector(state => state.room)
@@ -65,26 +67,27 @@ export default function Home() {
   function createRoom(e) {
     e.preventDefault()
     const data = getFormData(e.target)
+    dispatch(setUsername(data.name))
 
     // generate a room code
-    const roomCode = generateId(5).toUpperCase()
+    // const code = generateId(5).toUpperCase()
 
     // Send room code to socket to store it
     // return isUnique
-    // socket.emit('create-new-room', data)
+    socket.emit('create-new-room')
 
     // if isUnique
 
-    // assign Icon
-    let randomInt = Math.floor(Math.random()*playerIcons.length)
-    dispatch(addUser(data.name, playerIcons[randomInt]))
-    // setInRoom(roomCode)
-    dispatch(setRoom(roomCode, data.name, true))
+    // // assign Icon
+    // let randomInt = Math.floor(Math.random()*playerIcons.length)
+    // dispatch(addUser(data.name, playerIcons[randomInt]))
+    // // setInRoom(roomCode)
+    // dispatch(setRoom(roomCode, data.name, true))
 
-    console.log({username, room, isHost});
+    // console.log({username, room, isHost});
     
-    // navigate to lobby for the new room
-    navigate(`/rooms/${roomCode}`)
+    // // navigate to lobby for the new room
+    // navigate(`/rooms/${roomCode}`)
   }
   
   function joinRoom(e) {
@@ -128,6 +131,15 @@ export default function Home() {
     console.log('From local storage:', localStorageData)
     console.log('Current state:', {username, icon, room, isHost});
 
+    socket.on('created-room', ({ msg, code }) => {
+      console.log(msg);
+    })
+    
+    socket.on('joined-room', ({ msg, code }) => {
+      console.log(msg, code);
+      setInRoom(code)
+    })
+
     socket.on('admin-message', (msg) => {
       console.log(msg);
     })
@@ -146,48 +158,53 @@ export default function Home() {
     };
   }, []);
 
-  if(localStorage?.room.code){
-    return (<div>
-      Hello {username}! You're already in room {room.code}.
-
-      <button onClick={() => navigate(`/rooms/${room.code}`)}>Rejoin</button>
-      <button onClick={leaveRoomHandler}>Leave</button>
-    </div>)
-  }
-
-
   return (
     <div className='Home'>
-      <div className = "formContainer">
-        <div className='form1 smallContainer'>
-          <form name="createRoom" onSubmit={createRoom}>
+
+      {
+        inRoom ?
+        
+        <div>
+          Hello {username}! You're already in room {room.code}.
+
+          <button onClick={() => navigate(`/rooms/${room.code}`)}>Rejoin</button>
+          <button onClick={leaveRoomHandler}>Leave</button>
+        </div> :
+        
+        <div className = "formContainer">
+          <div className='form1 smallContainer'>
+            <form name="createRoom" onSubmit={createRoom}>
+              <label>
+                Name
+                <input type="text" placeholder='Enter a Name' name='name' defaultValue={username} required className="inputField"></input>
+              </label>
+              <button>Create Room</button>
+            </form>
+          </div>
+          <div className='form2 smallContainer'>
+          <form name="joinRoom" onSubmit={joinRoom}>
+            <label>
+              Room code
+              <input type="text" placeholder='Enter room code' name='roomCode' required className="inputField"></input>
+            </label>
             <label>
               Name
-              <input type="text" placeholder='Enter a Name' name='name' defaultValue={username} required className="inputField"></input>
+              <input type="text" placeholder='Enter a name' name='name' defaultValue={username} required></input>
             </label>
-            <button>Create Room</button>
+            <input type="submit" value="Join"></input>
           </form>
+          </div>
         </div>
-        <div className='form2 smallContainer'>
-        <form name="joinRoom" onSubmit={joinRoom}>
-          <label>
-            Room code
-            <input type="text" placeholder='Enter room code' name='roomCode' required className="inputField"></input>
-          </label>
-          <label>
-            Name
-            <input type="text" placeholder='Enter a name' name='name' defaultValue={username} required></input>
-          </label>
-          <input type="submit" value="Join"></input>
-        </form>
-        </div>
+
+      }
+
+      <div>
+        Rules
       </div>
 
       <div>
         <NavLink to="/leaderboard">Leaderboard</NavLink>
       </div>
-
-      {/* ###################### */}
       
     </div>
   )

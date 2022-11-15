@@ -44,10 +44,10 @@ export default function Game() {
 
   return (
     <div className='Game'>
-      <img className="filteredImg" src={sprite}></img>
+      <img className="filteredImg" src={sprite} alt="Mystery pokemon"></img>
       <Timer/>
       <div className='ImgContainer'>
-        <img src=''></img>
+        <img src='' alt=""></img>
       </div>
 
       <div className='MultipleChoice'>
