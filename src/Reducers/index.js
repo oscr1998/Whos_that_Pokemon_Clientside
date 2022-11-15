@@ -38,6 +38,11 @@ export default function reducer(state = initState, action){
             setLocalStorage('data', updatedData)
             return updatedData
 
+        case "LEAVE_ROOM":
+            const leaveRoomState = {...state, room: initState.room}
+            setLocalStorage('data', leaveRoomState)
+            return {...state, leaveRoomState}
+
         case "ADD_USER":
             const {newUser, newIcon} = action.payload
             return {...state, username: newUser, icon: newIcon }

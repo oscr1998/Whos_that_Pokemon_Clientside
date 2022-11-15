@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { NavLink, useNavigate } from 'react-router-dom';
-import { loadData, setRoom, addUser } from '../../Actions';
+import { loadData, setRoom, leaveRoom, addUser } from '../../Actions';
 
 import './style.css'
 import io from "socket.io-client"
@@ -109,6 +109,11 @@ export default function Home() {
     navigate(`/rooms/${data.roomCode}`)
   }
 
+  function leaveRoomHandler(){
+    dispatch(leaveRoom())
+    window.location.reload()
+  }
+
   useEffect(() => {
     // Get local storage and store state
     const localStorageData = JSON.parse(window.localStorage.getItem('data'))
@@ -141,12 +146,12 @@ export default function Home() {
     };
   }, []);
 
-  if(localStorage){
+  if(localStorage?.room.code){
     return (<div>
       Hello {username}! You're already in room {room.code}.
 
-      <button>Rejoin</button>
-      <button>Leave</button>
+      <button onClick={() => navigate(`/rooms/${room.code}`)}>Rejoin</button>
+      <button onClick={leaveRoomHandler}>Leave</button>
     </div>)
   }
 
