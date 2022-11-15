@@ -40,6 +40,9 @@ export default function reducer(state = initState, action){
         case "ADD_USER":
             const {newUser, newIcon} = action.payload
             return {...state, username: newUser, icon: newIcon }
+        case "ROUND_AMOUNT":
+            const {newRoundAmount} = action.payload
+            return {...state, roundAmount : newRoundAmount}
         default:
             return state
     }

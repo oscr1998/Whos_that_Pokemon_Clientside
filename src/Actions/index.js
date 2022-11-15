@@ -20,3 +20,7 @@ export const createRoom = roomId => {
 export const createUser = user => {
     return {type: "STORE_USER", payload: user}
 }
+
+export const setRoundNumber= user => {
+    return {type: "ROUND_AMOUNT", payload: user}
+}
