@@ -158,14 +158,12 @@ export default function Home() {
 
   return (
     <div className='Home'>
-
-      {room.code && <p>Already in a room. <a href='#'>Leave room {room.code}</a></p>}
       <div className = "formContainer">
         <div className='form1 smallContainer'>
           <form name="createRoom" onSubmit={createRoom}>
             <label>
               Name
-              <input type="text" placeholder='Enter a Name' name='name' required className="inputField"></input>
+              <input type="text" placeholder='Enter a Name' name='name' defaultValue={username} required className="inputField"></input>
             </label>
             <button>Create Room</button>
           </form>
