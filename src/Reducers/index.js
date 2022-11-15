@@ -26,7 +26,10 @@ export default function reducer(state = initState, action){
 
             room = state.room
             room.code = code
-            room.host = name
+
+            if(isHost)
+                room.host = name
+            
             room.users.push(name)
             
             const updatedData = {...state, username: name, room, isHost}

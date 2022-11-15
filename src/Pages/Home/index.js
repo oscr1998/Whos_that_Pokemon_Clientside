@@ -99,6 +99,13 @@ export default function Home() {
 
     // Connect to room
     console.log("Connecting to", data.roomCode);
+
+    // assign Icon
+    let randomInt = Math.floor(Math.random()*playerIcons.length)
+    dispatch(addUser(data.name, playerIcons[randomInt]))
+    
+    dispatch(setRoom(data.roomCode, data.name, false))
+
     navigate(`/rooms/${data.roomCode}`)
   }
 
@@ -139,7 +146,7 @@ export default function Home() {
         <form name="createRoom" onSubmit={createRoom}>
           <label>
             Name
-            <input type="text" placeholder='Enter a Name' name='name' required></input>
+            <input type="text" placeholder='Enter a name' name='name' required></input>
           </label>
           <button>Create Room</button>
         </form>
@@ -151,7 +158,7 @@ export default function Home() {
           </label>
           <label>
             Name
-            <input type="text" placeholder='Enter a Name' name='Name' required></input>
+            <input type="text" placeholder='Enter a name' name='name' required></input>
           </label>
           <input type="submit" value="Join"></input>
         </form>
