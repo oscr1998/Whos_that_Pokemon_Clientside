@@ -1,3 +1,8 @@
+// Loads all data into redux state
+export const loadData = (data) => {
+    return {type: "LOAD_DATA", payload: data}
+}
+
 // Sets room code for the room we are in
 export const setRoom = (code, name, isHost) => {
     return {type: "SET_ROOM", payload: {code, name, isHost}}

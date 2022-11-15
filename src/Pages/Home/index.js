@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { NavLink, useNavigate } from 'react-router-dom';
-import { setRoom, addUser } from '../../Actions';
+import { loadData, setRoom, addUser } from '../../Actions';
 
 import './style.css'
 import io from "socket.io-client"
@@ -38,28 +38,28 @@ let playerIcons = [
 const serverEndpoint = "http://127.0.0.1:5001";
 const socket = io(serverEndpoint);
 
-const getFormData = (form) => Object.fromEntries(new FormData(form))
+const getFormData = form => Object.fromEntries(new FormData(form))
+const generateId = length => {
+  const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'
+  const charactersLength = characters.length
 
-function makeid(length) {
-  var result           = '';
-  var characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-  var charactersLength = characters.length;
-  for ( var i = 0; i < length; i++ ) {
-      result += characters.charAt(Math.floor(Math.random() * charactersLength));
-  }
-  return result;
+  let result = ''
+  for (let i = 0; i < length; i++)
+      result += characters.charAt(Math.floor(Math.random() * charactersLength))
+
+  return result
 }
 
 export default function Home() {
   const [isConnected, setIsConnected] = useState(socket.isConnected)
-  const [inRoom, setInRoom] = useState(null)
-  const navigate = useNavigate()
+  const [localStorage, setLocalStorage] = useState(null)
 
   const username = useSelector(state => state.username)
   const room = useSelector(state => state.room)
   const isHost = useSelector(state => state.isHost)
   const icon = useSelector(state => state.icon)
 
+  const navigate = useNavigate()
   const dispatch = useDispatch()
 
   function createRoom(e) {
@@ -67,7 +67,7 @@ export default function Home() {
     const data = getFormData(e.target)
 
     // generate a room code
-    const roomCode = makeid(5).toUpperCase()
+    const roomCode = generateId(5).toUpperCase()
 
     // Send room code to socket to store it
     // return isUnique
@@ -99,11 +99,30 @@ export default function Home() {
 
     // Connect to room
     console.log("Connecting to", data.roomCode);
+
+    // assign Icon
+    let randomInt = Math.floor(Math.random()*playerIcons.length)
+    dispatch(addUser(data.name, playerIcons[randomInt]))
+
+    dispatch(setRoom(data.roomCode, data.name, false))
+
     navigate(`/rooms/${data.roomCode}`)
   }
 
   useEffect(() => {
-    console.log({username, room, isHost});
+    // Get local storage and store state
+    const localStorageData = JSON.parse(window.localStorage.getItem('data'))
+
+    if(localStorageData){
+      // Use local storage as source of truth
+      // Maybe replace with backend database in the future
+      dispatch(loadData(localStorageData))
+      setLocalStorage(localStorageData)
+    }
+
+    console.log('From local storage:', localStorageData)
+    console.log('Current state:', {username, icon, room, isHost});
+
     socket.on('admin-message', (msg) => {
       console.log(msg);
     })
@@ -122,6 +141,14 @@ export default function Home() {
     };
   }, []);
 
+  if(localStorage){
+    return (<div>
+      Hello {username}! You're already in room {room.code}.
+
+      <button>Rejoin</button>
+      <button>Leave</button>
+    </div>)
+  }
 
 
   return (
@@ -146,7 +173,7 @@ export default function Home() {
           </label>
           <label>
             Name
-            <input type="text" placeholder='Enter a Name' name='Name' required></input>
+            <input type="text" placeholder='Enter a name' name='name' defaultValue={username} required></input>
           </label>
           <input type="submit" value="Join"></input>
         </form>
