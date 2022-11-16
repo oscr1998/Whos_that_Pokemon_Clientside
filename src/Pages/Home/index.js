@@ -53,6 +53,10 @@ export default function Home() {
   const room = useSelector(state => state.room)
   const isHost = useSelector(state => state.isHost)
 
+  useEffect(() => {
+    setName(username)
+  }, [username])
+
   function createRoomHandler(e) {
     e.preventDefault()
     const data = getFormData(e.target)
@@ -80,7 +84,7 @@ export default function Home() {
           <form name="createRoom" onSubmit={createRoomHandler} className="createRoom">
             <label>
               Create a Room
-              <input type="text" placeholder='Enter a Name' name='name' defaultValue={username} required className="inputField nes-input"></input>
+              <input type="text" placeholder='Enter a Name' name='name' value={name} onChange={(e) => setName(e.target.value)} className="inputField nes-input" required></input>
             </label>
             <button className="nes-btn is-primary">Create Room</button>
           </form>
@@ -90,7 +94,7 @@ export default function Home() {
           <form name="createRoom" onSubmit={joinRoomHandler}>
             <label>
               Join an Existing Game
-              <input type="text" placeholder='Enter a name' name='name' defaultValue={username} required className='nes-input'></input>
+              <input type="text" placeholder='Enter a name' name='name' value={name} onChange={(e) => setName(e.target.value)} className='nes-input' required></input>
               <input type="text" placeholder='Enter room code' name='roomCode' required className="inputField nes-input"></input>
             </label>
             <input type="submit" value="Join" className="nes-btn is-success btn2"></input>
