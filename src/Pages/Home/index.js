@@ -70,48 +70,11 @@ export default function Home() {
     dispatch(leaveRoom())
   }
 
-  // useEffect(() => {
-  //   // Get local storage and store state
-  //   const localStorageData = JSON.parse(window.localStorage.getItem('data'))
-
-  //   if(localStorageData){
-  //     // Use local storage as source of truth
-  //     // Maybe replace with backend database in the future
-  //     // dispatch(loadData(localStorageData))
-  //     setLocalStorage(localStorageData)
-  //   }
-
-  //   // console.log('From local storage:', localStorageData)
-  //   // console.log('Current state:', {username, icon, room, isHost});
-
-  //   socket.on('connect', () => {
-  //     setIsConnected(true)
-  //   })
-
-  //   socket.on('disconnect', () => {
-  //     setIsConnected(false)
-  //   })
-
-  //   socket.on('admin-message', (msg) => {
-  //     console.log(msg)
-  //   })
-
-  //   socket.on('created-room', ({ msg, code }) => {
-  //     console.log("CREATED ROOM EVENT", name)
-  //     dispatch(createRoom(code))
-  //   })
-    
-  //   socket.on('joined-room', ({ msg, code }) => {
-  //     console.log("JOINED ROOM EVENT", msg)
-  //     dispatch(joinRoom(code))
-  //     navigate(`/rooms/${code}`)
-  //   })
-
   return (
     <div className='Home'>
       <div className = "formContainer nes-container is-centered">
         <div className='form1 smallContainer'>
-          <form name="createRoom" onSubmit={createRoom} className="createRoom">
+          <form name="createRoom" onSubmit={createRoomHandler} className="createRoom">
             <label>
               Create a Room
               <input type="text" placeholder='Enter a Name' name='name' defaultValue={username} required className="inputField nes-input"></input>
@@ -121,7 +84,7 @@ export default function Home() {
           <hr></hr>
         </div>
         <div className='form2 smallContainer'>
-        <form name="createRoom" onSubmit={joinRoom}>
+        <form name="createRoom" onSubmit={joinRoomHandler}>
           <label>
             Join an Existing Game
             <input type="text" placeholder='Enter a name' name='name' defaultValue={username} required className='nes-input'></input>
