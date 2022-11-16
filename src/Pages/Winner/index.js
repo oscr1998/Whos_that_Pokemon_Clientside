@@ -2,6 +2,7 @@ import React, {useState} from 'react'
 import { Podium } from '../../Components'
 import './style.css'
 import { useSelector } from 'react-redux';
+import { NavLink } from 'react-router-dom';
 
 export default function Winner() {
   const data = useSelector(state => state)
@@ -20,29 +21,86 @@ export default function Winner() {
   });
 
   return (
+    <div>
     <div className='Winner'>
-      <div>
-        <h1>MACHAMPION:</h1>
-
-        <div>
-          <h1>{array[0].name}</h1>
-          <h1>{array[1].name}</h1>
-          <h1>{array[2].name}</h1>
-        </div>
-
-        <div class="lists">
-          <h1>Game Leaderboard:</h1>
-          <ul class="nes-list is-disc">
-            {array.map(el => <li>{el.name}</li>)}
-          </ul>
-          <ul class="nes-list is-circle">
-            {array.map(el => <li>{el.score}</li>)}
-          </ul>
+      <div className="container1 nes-container with-title is-centered">
+        <h1><i className="nes-icon trophy is-large"></i>        MACHAMPIONS       <i className="nes-icon trophy is-large"></i></h1>
+        <div className="podium">
+          <table id="podium">
+            <tr>
+              <td>
+                <div className="text-center">2nd</div>
+                <div id="second"><div className="text-inside">
+                    <span className="player">
+                    {array[1].name}
+                    </span>
+                    <span className="points">
+                    Points: {array[0].score}
+                    </span>
+                  </div>
+                  </div>
+              </td>
+              <td>
+                <div className="text-center">1st</div>
+                <div id="first">
+                <div className="text-inside">
+                    <span className="player">
+                    {array[0].name}
+                    </span>
+                    <span className="points">
+                    Points: {array[0].score}
+                    </span>
+                  </div>
+                </div>
+              </td>
+              <td>
+                <div className="text-center">3rd</div>
+                <div id="third">
+                  <div className="text-inside">
+                    <span className="player">
+                    {array[2].name}
+                    </span>
+                    <span className="points">
+                    Points: {array[2].score}
+                    </span>
+                  </div>
+                </div>
+              </td>
+            </tr>
+          </table>
         </div>
       </div>
 
-      <button>Back to Lobby?</button>
-      <button>Play again?</button>
+      <div className="lists container2 nes-container with-title is-centered">
+          <h1>Game Leaderboard:</h1>
+
+          <div className="leaderboardContainer">
+            <div className>
+              <h3>Players:</h3>
+              <ol className="none">
+                {array.map(el => <li>{el.name}</li>)}
+              </ol>
+            </div>
+
+            <div>
+            <h3>Scores:</h3>
+              <ul className="nes-list is-circle">
+                {array.map(el => <li>{el.score}</li>)}
+              </ul>
+            </div>
+          </div>
+          <NavLink to="/leaderboard" className="nes-btn is-warning leaderBtn">Global Leaderboard</NavLink>
+        </div>
+
+    </div>
+
+    <br/>
+    <br/>
+
+      <div className='btnDiv'>
+        <button className='nes-btn  winBtn'>Back to Lobby?</button>
+        <button className='nes-btn  winBtn'>Play again?</button>
+      </div>
     </div>
   )
 }

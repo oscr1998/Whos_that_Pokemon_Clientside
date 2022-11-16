@@ -1,3 +1,20 @@
 .Timer {
     visibility: visible;
 }
+
+.round-time-bar{
+    width: 40%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.h2{
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.timerCounter{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    width: 100%;
+}

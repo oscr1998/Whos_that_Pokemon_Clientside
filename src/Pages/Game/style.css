@@ -8,18 +8,55 @@
     pointer-events: none;
 }
 
-/* .parent{
+.whoPoke{
+    margin-left: auto;
+    margin-right: auto;
+}
+.parent{
     display: grid;
     grid-template-columns: 100px, 100px;
-    margin: 2%;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
 }
- 
+
 .answer {
     display: flex;
     justify-content: center;
     align-items: center;
-  }
-  
-  .answer:nth-child(4) {
+    padding: 10px;
+    }
+
+    .answer:nth-child(4) {
     grid-column: 2;
-  } */
+    }
+
+    .correct{
+    display: none;
+    margin-left: auto;
+    margin-right: auto;
+    }
+
+    #correct{
+    display: none;
+    margin-left: auto;
+    margin-right: auto;
+    }
+    
+    .incorrect{
+    margin-left: auto;
+    margin-right: auto;
+    }
+
+    #incorrect{
+    display: none;
+    margin-left: auto;
+    margin-right: auto;
+    }
+
+    .revealContainer{
+        width: 50%;
+        margin-left: auto;
+        margin-right: auto;
+        text-align: center;
+    }
