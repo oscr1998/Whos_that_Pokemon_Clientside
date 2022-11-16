@@ -102,5 +102,7 @@ export default function App() {
         
       </div>
     </SocketContext.Provider>
+    </div>
+    </div>
   )
 }
