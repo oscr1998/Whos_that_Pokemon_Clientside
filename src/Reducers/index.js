@@ -1,11 +1,24 @@
 const initState = {
-    username: "",
+    username: "oliver",
     icon: "",
-    score: 0,
+    score: 12,
     room: {
         code: "",
         name: "",
-        users: [],
+        users: [
+            {
+                name: 'sean',
+                score: 1000
+            },
+            {
+                name: 'kornelia',
+                score: 1001
+            },
+            {
+                name: 'ami',
+                score: 50
+            },
+        ],
         state: "",
         host: ""
     },

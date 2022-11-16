@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import axios from "axios";
 import { Timer, Choices } from '../../Components'
 import './style.css'
@@ -10,6 +10,8 @@ import { useNavigate } from "react-router-dom";
 
 import incorrectMP3 from '../../Components/MusicPlayer/Sound/SFX/Mario_Fail.mp3'
 import correctMP3 from '../../Components/MusicPlayer/Sound/SFX/Pokemon_Item_Correct.mp3'
+
+import { SocketContext } from '../../App';
 
 export default function Game() {
   const [sprite, setSprite] = useState("");
@@ -23,6 +25,7 @@ export default function Game() {
   const score = useSelector(state => state.score)
   const dispatch = useDispatch()
   const navigate = useNavigate()
+  const socket = useContext(SocketContext)
 
   async function fetchCorrectPokemon(i) {
     const fetchApi = `https://kakunamatata.herokuapp.com/pokemon/${i}`
@@ -76,6 +79,7 @@ function sendScore(){
   dispatch({
     type: "SET_SCORE", payload:(100)
   })
+  socket.emit('update-score', {score: score})
 }
 
 function checkAnswer(e){

@@ -1,9 +1,12 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useContext } from 'react'
 import { PlayerCard } from '../../Components'
 import { NavLink, useNavigate, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { loadData } from '../../Actions';
 import './style.css'
+
+import { SocketContext } from '../../App';
+import { Socket } from 'socket.io-client';
 
 export default function Lobby() {
   const { code } = useParams()
@@ -14,6 +17,8 @@ export default function Lobby() {
 
   const dispatch = useDispatch()
   const navigate = useNavigate()
+
+  const socket = useContext(SocketContext)
 
   useEffect(() => {
     // Get local storage and store state
@@ -39,6 +44,11 @@ export default function Lobby() {
     alert("Copied the text: " + window.location.href);
   }
 
+  function startGame(){
+    socket.emit('startGame')
+    // navigate("/game")
+    console.log("startgame function")
+  }
 
   return (room.code === code) ? (
   // return (
@@ -69,12 +79,13 @@ export default function Lobby() {
           <input type="number" defaultValue={10} min='1' max='10' disabled={!isHost}></input>
         </div>
         { isHost ?
-          <NavLink to="/game" className="nes-btn is-error">START GAME</NavLink> :
+          <input type="button" value="START GAME" className="nes-btn is-error" onClick={startGame}></input>
+          :
           <p>Waiting for host to start game</p>
         }
         
       </div>
-
+      {/* <NavLink to="/game" className="nes-btn is-error">START GAME</NavLink>  */}
       <div className="lobbyPlayers nes-container is-centered">
         <h1>Players:</h1>
         {
