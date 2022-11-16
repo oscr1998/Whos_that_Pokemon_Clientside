@@ -35,9 +35,6 @@ import icon22 from '../../Components/images/icons/mimikyu.png'
 let playerIcons = [
   icon0,icon1,icon2,icon3,icon4,icon5,icon6,icon7,icon8,icon9,icon10,icon11,icon12,icon13,icon14,icon15,icon16,icon17,icon18,icon19, icon20,icon21,icon22
 ]
-// !#####################################################
-// const serverEndpoint = "http://127.0.0.1:5001";
-// const socket = io(serverEndpoint);
 
 const getFormData = form => Object.fromEntries(new FormData(form))
 
@@ -61,13 +58,13 @@ export default function Home() {
     e.preventDefault()
     const data = getFormData(e.target)
     dispatch(setUsername(data.name))
-    socket.emit('create-new-room')
+    socket.emit('create-new-room', { name: data.name })
   }
   
   function joinRoomHandler(e) {
     e.preventDefault()
     const data = getFormData(e.target)
-    socket.emit('join-existing-room', data.code)
+    socket.emit('join-existing-room', { code: data.code, name: data.name })
   }
 
   return (
@@ -95,7 +92,7 @@ export default function Home() {
             <label>
               Join an Existing Game
               <input type="text" placeholder='Enter a name' name='name' value={name} onChange={(e) => setName(e.target.value)} className='nes-input' required></input>
-              <input type="text" placeholder='Enter room code' name='roomCode' required className="inputField nes-input"></input>
+              <input type="text" placeholder='Enter room code' name='code' required className="inputField nes-input"></input>
             </label>
             <input type="submit" value="Join" className="nes-btn is-success btn2"></input>
           </form>

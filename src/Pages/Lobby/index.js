@@ -74,7 +74,7 @@ export default function Lobby() {
       <div className="lobbyPlayers nes-container is-centered">
         <h1>Players:</h1>
         {
-          room.users.map(user => <PlayerCard key={user} name={user}/>)
+          room.users.map(user => <PlayerCard key={user.name} name={user.name}/>)
         }
         
       </div>

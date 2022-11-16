@@ -32,10 +32,10 @@ export default function reducer(state = initState, action){
 
         case "JOIN_ROOM":
             const users = state.room.users
-            users.push(state.username)
+            users.push(action.payload.user)
 
             console.log("JOIN_ROOM", action.payload);
-            return { ...state, room: { ...state.room, code: action.payload, users }}
+            return { ...state, room: { ...state.room, code: action.payload.code, users }}
 
         case "LEAVE_ROOM":
             return {...state, room: initState.room, isHost: false }

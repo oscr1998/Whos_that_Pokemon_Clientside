@@ -51,14 +51,14 @@ export default function App() {
       dispatch(createRoom(code))
     })
     
-    socket.on('joined-room', ({ msg, code }) => {
-      console.log("JOINED ROOM EVENT", msg)
-      dispatch(joinRoom(code))
+    socket.on('joined-room', ({ msg, code, user }) => {
+      console.log("JOINED ROOM EVENT", `${user.name} joined ${code}`)
+      dispatch(joinRoom(code, user))
       navigate(`/rooms/${code}`)
     })
 
     return () => {
-      console.log('SOCKET OFF');
+      console.log('APP CLEANUP');
       socket.off('connect')
       socket.off('disconnect')
       socket.off('admin-message')
