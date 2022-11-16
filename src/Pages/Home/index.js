@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { NavLink, useNavigate } from 'react-router-dom';
-import { setUsername, createRoom, joinRoom, leaveRoom } from '../../Actions';
+import { setUsername, setIcon, createRoom, joinRoom, leaveRoom } from '../../Actions';
 import { SocketContext } from '../../App';
 
 import './style.css'
@@ -37,6 +37,7 @@ let playerIcons = [
 ]
 
 const getFormData = form => Object.fromEntries(new FormData(form))
+const getRandomNumber = (min, max) => (min + Math.floor(Math.random() * max))
 
 export default function Home() {
   const socket = useContext(SocketContext)
@@ -58,6 +59,7 @@ export default function Home() {
     e.preventDefault()
     const data = getFormData(e.target)
     dispatch(setUsername(data.name))
+    dispatch(setIcon(playerIcons[getRandomNumber(0, playerIcons.length)]))
     socket.emit('create-new-room', { name: data.name })
   }
   

@@ -37,7 +37,6 @@ export default function reducer(state = initState, action){
 
         case "JOIN_ROOM":
             const users = action.payload.users
-            users.push(action.payload.user)
 
             console.log("JOIN_ROOM", action.payload);
             return { ...state, room: { ...state.room, code: action.payload.code, users }}

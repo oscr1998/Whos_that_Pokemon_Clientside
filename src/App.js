@@ -56,7 +56,7 @@ export default function App() {
       if(others.length < 1)
         console.log(user, "CREATED ROOM", code);
       else
-        console.log(user, "JOINED", others.join(','), "IN ROOM", code)
+        console.log(user, "JOINED", JSON.stringify(others), "IN ROOM", code)
       
       dispatch(joinRoom(code, user, others))
       navigate(`/rooms/${code}`)
@@ -71,6 +71,15 @@ export default function App() {
       socket.off('joined-room')
     }
   }, [])
+
+  function sendChatMessage (e) {
+    e.preventDefault()
+    
+    const data = Object.fromEntries(new FormData(e.target))
+    const { room, message } = data
+
+    socket.emit('chat-message', { room, message })
+  }
 
 
   return (
@@ -93,6 +102,15 @@ export default function App() {
           <Route path="/Winner" element={<Winner/>}/>
           <Route path="*" element={<NotFound/>}/>
         </Routes>
+
+        <div>
+          <h2>Chat</h2>
+          <form onSubmit={sendChatMessage}>
+            <input type='text' name='room' placeholder='Global channel'></input>
+            <input type='text' name='message' placeholder='Message' required></input>
+            <input type='submit' value='Send'></input>
+          </form>
+        </div>
       </div>
     </SocketContext.Provider>
   )

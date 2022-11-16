@@ -8,7 +8,7 @@ export const clearData = () => ({type: "LOAD_DATA"})
 export const setUsername = (name) => ({ type: "SET_USERNAME", payload: name })
 
 // Sets icon
-export const setIcon = (icon) => ({ type: "SET_USERNAME", payload: icon })
+export const setIcon = (icon) => ({ type: "SET_ICON", payload: icon })
 
 // Creates new room
 export const createRoom = () => ({ type: "CREATE_ROOM" })

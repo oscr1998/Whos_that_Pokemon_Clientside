@@ -9,6 +9,8 @@ export default function Lobby() {
   const { code } = useParams()
   const [localStorage, setLocalStorage] = useState(null)
 
+  const username = useSelector(state => state.username)
+  const icon = useSelector(state => state.icon)
   const room = useSelector(state => state.room)
   const isHost = useSelector(state => state.isHost)
 
@@ -77,8 +79,14 @@ export default function Lobby() {
 
       <div className="lobbyPlayers nes-container is-centered">
         <h1>Players:</h1>
+
+        <div>
+          <h3>You</h3>
+          <PlayerCard name={username} icon={icon}/>
+        </div>
+
         {
-          room.users.map(user => <PlayerCard key={user.name} name={user.name}/>)
+          room.users.map(user => <PlayerCard key={user.name} name={user.name} icon={user.icon}/>)
         }
         
       </div>
