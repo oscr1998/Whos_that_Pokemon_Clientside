@@ -26,7 +26,7 @@ export default function Lobby() {
       setLocalStorage(localStorageData)
     }
 
-    console.log(room);
+    console.log(room)
 
     // If local storage is different from redux state
   }, [])

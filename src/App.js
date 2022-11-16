@@ -47,13 +47,17 @@ export default function App() {
     })
 
     socket.on('created-room', ({ msg, code }) => {
-      console.log("CREATED ROOM EVENT", msg)
+      // console.log("CREATED ROOM EVENT", msg)
       dispatch(createRoom(code))
     })
     
-    socket.on('joined-room', ({ msg, code, user }) => {
-      console.log("JOINED ROOM EVENT", `${user.name} joined ${code}`)
-      dispatch(joinRoom(code, user))
+    socket.on('joined-room', ({ msg, code, user, others }) => {
+      if(others.length < 1)
+        console.log(user, "CREATED ROOM", code);
+      else
+        console.log(user, "JOINED", others.join(','), "IN ROOM", code)
+      
+      dispatch(joinRoom(code, user, others))
       navigate(`/rooms/${code}`)
     })
 
