@@ -1,10 +1,11 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { NavLink, useNavigate } from 'react-router-dom';
 import { setUsername, createRoom, joinRoom, leaveRoom } from '../../Actions';
+import { SocketContext } from '../../App';
 
 import './style.css'
-import io from "socket.io-client"
+// import io from "socket.io-client"
 
 // !IMAGES ###########################################
 import icon0 from '../../Components/images/icons/pikachu_normal.png'
@@ -35,15 +36,15 @@ let playerIcons = [
   icon0,icon1,icon2,icon3,icon4,icon5,icon6,icon7,icon8,icon9,icon10,icon11,icon12,icon13,icon14,icon15,icon16,icon17,icon18,icon19, icon20,icon21,icon22
 ]
 // !#####################################################
-const serverEndpoint = "http://127.0.0.1:5001";
-const socket = io(serverEndpoint);
+// const serverEndpoint = "http://127.0.0.1:5001";
+// const socket = io(serverEndpoint);
 
 
 const setLocalStorage = (key, value) => window.localStorage.setItem(key, JSON.stringify(value))
 const getFormData = form => Object.fromEntries(new FormData(form))
 
 export default function Home() {
-  const [isConnected, setIsConnected] = useState(socket.isConnected)
+  const socket = useContext(SocketContext)
   const [localStorage, setLocalStorage] = useState(null)
   const [name, setName] = useState('')
   const navigate = useNavigate()
@@ -71,51 +72,52 @@ export default function Home() {
     dispatch(leaveRoom())
   }
 
-  useEffect(() => {
-    // Get local storage and store state
-    const localStorageData = JSON.parse(window.localStorage.getItem('data'))
+  // useEffect(() => {
+  //   // Get local storage and store state
+  //   const localStorageData = JSON.parse(window.localStorage.getItem('data'))
 
-    if(localStorageData){
-      // Use local storage as source of truth
-      // Maybe replace with backend database in the future
-      // dispatch(loadData(localStorageData))
-      setLocalStorage(localStorageData)
-    }
+  //   if(localStorageData){
+  //     // Use local storage as source of truth
+  //     // Maybe replace with backend database in the future
+  //     // dispatch(loadData(localStorageData))
+  //     setLocalStorage(localStorageData)
+  //   }
 
-    console.log('From local storage:', localStorageData)
-    console.log('Current state:', {username, icon, room, isHost});
+  //   // console.log('From local storage:', localStorageData)
+  //   // console.log('Current state:', {username, icon, room, isHost});
 
-    socket.on('connect', () => {
-      setIsConnected(true)
-    })
+  //   socket.on('connect', () => {
+  //     setIsConnected(true)
+  //   })
 
-    socket.on('disconnect', () => {
-      setIsConnected(false)
-    })
+  //   socket.on('disconnect', () => {
+  //     setIsConnected(false)
+  //   })
 
-    socket.on('admin-message', (msg) => {
-      console.log(msg)
-    })
+  //   socket.on('admin-message', (msg) => {
+  //     console.log(msg)
+  //   })
 
-    socket.on('created-room', ({ msg, code }) => {
-      console.log("CREATED ROOM EVENT", name)
-      dispatch(createRoom(code))
-    })
+  //   socket.on('created-room', ({ msg, code }) => {
+  //     console.log("CREATED ROOM EVENT", name)
+  //     dispatch(createRoom(code))
+  //   })
     
-    socket.on('joined-room', ({ msg, code }) => {
-      console.log("JOINED ROOM EVENT", name, username)
-      dispatch(joinRoom(code))
-      navigate(`/rooms/${code}`)
-    })
+  //   socket.on('joined-room', ({ msg, code }) => {
+  //     console.log("JOINED ROOM EVENT", msg)
+  //     dispatch(joinRoom(code))
+  //     navigate(`/rooms/${code}`)
+  //   })
 
-    return () => {
-      socket.off('connect')
-      socket.off('disconnect')
-      socket.off('admin-message')
-      socket.off('created-room')
-      socket.off('joined-room')
-    }
-  }, [])
+  //   return () => {
+  //     console.log('SOCKET OFF');
+  //     socket.off('connect')
+  //     socket.off('disconnect')
+  //     socket.off('admin-message')
+  //     socket.off('created-room')
+  //     socket.off('joined-room')
+  //   }
+  // }, [])
 
   return (
     <div className='Home'>
