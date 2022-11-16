@@ -13,7 +13,7 @@ export default function Game() {
   const [wrongChoice2, setWrongChoice2]=useState("");
   const [wrongChoice3, setWrongChoice3]=useState("");
   const [numOfRounds, setNumOfRounds]=useState(5);
-  const [roundOver, setRoundOver]=useState(1);
+  const [roundOver, setRoundOver]=useState(false);
 
   async function fetchCorrectPokemon(i) {
     const fetchApi = `https://kakunamatata.herokuapp.com/pokemon/${i}`
@@ -102,17 +102,15 @@ function checkAnswer(e){
 // game starts on load
 // pokemon sprite and wrong answers generated on load
 let roundTimer = 5;
-let rounds = 5
 let possibleAnswers= [spriteName, wrongChoice1, wrongChoice2, wrongChoice3]
 randomize(possibleAnswers)
-
 // timer starts, counts down, when timer hits 0, round is over and a new one starts
 useEffect(() => {
     let quizTimer = setInterval(function(){
-        if(rounds >0){
+        if(numOfRounds >0){
         roundTimer -= 1
         console.log("roundTimer:", roundTimer)
-        console.log("roundNum:", rounds)
+        console.log("roundNum:", numOfRounds)
         // END OF TIMER REVEAL POKEMON AND CORRECT ANSWER
         if(roundTimer === 0){
             let pokeImg = document.getElementById("filteredImg")
@@ -127,33 +125,23 @@ useEffect(() => {
             button4.disabled = true;
             }
 
-        if(roundTimer === -3){
-          roundTimer = 5
-          rounds -= 1
-          console.log("roundNum in timer:", rounds)
-          console.log("#############")
-          setRoundOver(prev => prev +1)
-          setNumOfRounds(prev => prev -1)
-          let button1 = document.getElementById("1")
-          let button2 = document.getElementById("2")
-          let button3 = document.getElementById("3")
-          let button4 = document.getElementById("4")
-          button1.disabled = false;
-          button2.disabled = false;
-          button3.disabled = false;
-          button4.disabled = false;
-          let pokeImg = document.getElementById("filteredImg")
-          pokeImg.style.filter= "brightness(0%)"
-          }
+        if(roundTimer === -2){
+                roundTimer === 5
+                setNumOfRounds(prev => prev -1)
+                console.log("#############")
+                }
+        
+        if(numOfRounds === 0){
+            clearInterval(quizTimer);
+        }
         } else{
             console.log("game over")
         }
-        if(rounds === 0){
-          clearInterval(quizTimer);
-        }
         },1000)
-}, [])
+}, [spriteName])
 // when 10 rounds have been completed, end game
+
+
     return (
     <div className='Game'>
         <img id="filteredImg" src={sprite}></img>

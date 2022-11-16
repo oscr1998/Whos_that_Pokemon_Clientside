@@ -16,9 +16,7 @@ export default function Timer() {
       }
       let counter = document.getElementById("countdown")
       counter.value = counter.value-1;
-      console.log("value:",document.getElementById("countdown").value)
       timeleft -= 1;
-      console.log("time:",timeleft)
     }, 1000)
   },[])
 
