@@ -18,3 +18,6 @@ export const joinRoom = (code, user, users) => ({ type: "JOIN_ROOM", payload: {c
 
 // Leaves room
 export const leaveRoom = () => ({ type: "LEAVE_ROOM" })
+
+// EDIT AND SET SCORE
+export const setScore = (score) => ({ type: "SET_SCORE", payload: score})

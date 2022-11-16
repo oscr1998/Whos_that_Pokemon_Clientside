@@ -1,6 +1,7 @@
 const initState = {
     username: "",
     icon: "",
+    score: 0,
     room: {
         code: "",
         name: "",
@@ -22,6 +23,10 @@ export default function reducer(state = initState, action){
         case "SET_USERNAME":
             console.log("SET_USERNAME", action.payload);
             return { ...state, username: action.payload }
+
+        case "SET_SCORE":
+            console.log("SET_SCORE", action.payload);
+            return { ...state, score: action.payload }
 
         case "SET_ICON":
             return { ...state, icon: action.payload }
