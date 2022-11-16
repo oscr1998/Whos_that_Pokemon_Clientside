@@ -74,19 +74,9 @@ export default function App() {
 
 
   return (
-    <div className='App'>
-      <button onClick={MusicPlayer}>Music</button>
-      <div className="circlesContainer">
-        <img className="circles" src={pokeball} alt="pokeball"></img>
-        <img className="circles" src={pokeball} alt="pokeball"></img>
-        <img className="circles" src={pokeball} alt="pokeball"></img>
-        <img className="circles" src={pokeball} alt="pokeball"></img>
-        <img className="circles" src={pokeball} alt="pokeball"></img>
-        <img className="circles" src={pokeball} alt="pokeball"></img>
-        <img className="circles" src={pokeball} alt="pokeball"></img>
-        <img className="circles" src={pokeball} alt="pokeball"></img>
     <SocketContext.Provider value={socket}>
       <div className='App'>
+        <button onClick={MusicPlayer}>Music</button>
 
         <img className="title" src={title} alt="whos that pokemon title"></img>
         <div className="circlesContainer">
@@ -102,10 +92,7 @@ export default function App() {
           <Route path="/game" element={<Game/>}/>
           <Route path="*" element={<NotFound/>}/>
         </Routes>
-        
       </div>
     </SocketContext.Provider>
-    </div>
-    </div>
   )
 }
