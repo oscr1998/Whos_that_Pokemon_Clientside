@@ -26,7 +26,7 @@ export default function Lobby() {
       setLocalStorage(localStorageData)
     }
 
-    console.log(room);
+    console.log(room)
 
     // If local storage is different from redux state
   }, [])
@@ -50,7 +50,7 @@ export default function Lobby() {
             <button onClick={copyToClipBoard}>Copy Room Link</button>
           <div className="nes-select">
             <label>Choose Pokemon Generation:</label>
-          <select id="default_select">
+          <select id="default_select" disabled={!isHost}>
             <option>All</option>
             <option>1</option>
             <option>2</option>
@@ -66,15 +66,19 @@ export default function Lobby() {
 
         <div >
           <label>Number of rounds?:</label>
-          <input type="number" defaultValue={10} min='1' max='10'></input>
+          <input type="number" defaultValue={10} min='1' max='10' disabled={!isHost}></input>
         </div>
-        <NavLink to="/game" className="nes-btn is-error">START GAME</NavLink>
+        { isHost ?
+          <NavLink to="/game" className="nes-btn is-error">START GAME</NavLink> :
+          <p>Waiting for host to start game</p>
+        }
+        
       </div>
 
       <div className="lobbyPlayers nes-container is-centered">
         <h1>Players:</h1>
         {
-          room.users.map(user => <PlayerCard key={user} name={user}/>)
+          room.users.map(user => <PlayerCard key={user.name} name={user.name}/>)
         }
         
       </div>

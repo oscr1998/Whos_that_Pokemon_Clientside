@@ -22,7 +22,7 @@ export default function Timer() {
 
   return (
     <>
-      <div class="round-time-bar">
+      <div className="round-time-bar">
         <progress id="countdown" className="nes-progress is-primary" value="10" max="10"></progress>
       </div>
 

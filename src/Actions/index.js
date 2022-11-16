@@ -14,7 +14,7 @@ export const setIcon = (icon) => ({ type: "SET_USERNAME", payload: icon })
 export const createRoom = () => ({ type: "CREATE_ROOM" })
 
 // Sets room
-export const joinRoom = (code) => ({ type: "JOIN_ROOM", payload: code })
+export const joinRoom = (code, user, users) => ({ type: "JOIN_ROOM", payload: {code, user, users} })
 
 // Leaves room
 export const leaveRoom = () => ({ type: "LEAVE_ROOM" })
