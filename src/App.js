@@ -9,6 +9,7 @@ import pokeball from './Components/images/pokeball.svg'
 import title from './Components/images/Who.png'
 
 import './App.css'
+import MusicPlayer from './Components/MusicPlayer/index.js'
 
 const serverEndpoint = "http://127.0.0.1:5001"
 const socket = io(serverEndpoint)
@@ -69,6 +70,18 @@ export default function App() {
 
 
   return (
+    <div className='App'>
+      <button onClick={MusicPlayer}>Music</button>
+      <img className="title" src={title} alt="whos that pokemon title"></img>
+      <div className="circlesContainer">
+        <img className="circles" src={pokeball} alt="pokeball"></img>
+        <img className="circles" src={pokeball} alt="pokeball"></img>
+        <img className="circles" src={pokeball} alt="pokeball"></img>
+        <img className="circles" src={pokeball} alt="pokeball"></img>
+        <img className="circles" src={pokeball} alt="pokeball"></img>
+        <img className="circles" src={pokeball} alt="pokeball"></img>
+        <img className="circles" src={pokeball} alt="pokeball"></img>
+        <img className="circles" src={pokeball} alt="pokeball"></img>
     <SocketContext.Provider value={socket}>
       <div className='App'>
 
