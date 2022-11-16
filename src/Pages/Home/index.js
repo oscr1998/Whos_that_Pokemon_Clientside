@@ -39,8 +39,6 @@ let playerIcons = [
 // const serverEndpoint = "http://127.0.0.1:5001";
 // const socket = io(serverEndpoint);
 
-
-const setLocalStorage = (key, value) => window.localStorage.setItem(key, JSON.stringify(value))
 const getFormData = form => Object.fromEntries(new FormData(form))
 
 export default function Home() {
