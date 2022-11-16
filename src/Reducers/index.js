@@ -1,5 +1,6 @@
 const initState = {
     username: "",
+    icon: "",
     room: {
         code: "",
         name: "",
@@ -11,26 +12,34 @@ const initState = {
 }
 
 export default function reducer(state = initState, action){
-    let room
     switch(action.type){
-        case "STORE_ROOM":
-            return {...state, room: action.payload}
-        case "STORE_USER":
-            return {...state, users: action.payload}
+        case "LOAD_DATA":
+            return {...state, ...action.payload}
 
-        case "SET_ROOM":
-            const {code, name, isHost} = action.payload
-            room = state.room
-            room.code = code
-            room.host = name
-            room.users.push(name)
+        case "CLEAR_DATA":
+            return initState
 
-            return {...state, room, isHost }
-        case "ADD_USER":
-            const newUser = action.payload
-            room = state.room
-            room.users.push(newUser)
-            return {...state, room }
+        case "SET_USERNAME":
+            console.log("SET_USERNAME", action.payload);
+            return { ...state, username: action.payload }
+
+        case "SET_ICON":
+            return { ...state, icon: action.payload }
+
+        case "CREATE_ROOM":
+            console.log("CREATE_ROOM");
+            return { ...state, room: { ...state.room, host: state.username }, isHost: true }
+
+        case "JOIN_ROOM":
+            const users = state.room.users
+            users.push(action.payload.user)
+
+            console.log("JOIN_ROOM", action.payload);
+            return { ...state, room: { ...state.room, code: action.payload.code, users }}
+
+        case "LEAVE_ROOM":
+            return {...state, room: initState.room, isHost: false }
+
         default:
             return state
     }

@@ -1,17 +1,20 @@
-// Sets room code for the room we are in
-export const setRoom = (code, name, isHost) => {
-    return {type: "SET_ROOM", payload: {code, name, isHost}}
-}
+// Loads all data into redux state
+export const loadData = (data) => ({type: "LOAD_DATA", payload: data})
 
-// Adds user to the room we are in
-export const addUser = userId => {
-    return {type: "ADD_USER", payload: userId}
-}
+// Clears all data from redux state
+export const clearData = () => ({type: "LOAD_DATA"})
 
-export const createRoom = roomId => {
-    return {type: "STORE_ROOM", payload: roomId}
-}
+// Sets username
+export const setUsername = (name) => ({ type: "SET_USERNAME", payload: name })
 
-export const createUser = user => {
-    return {type: "STORE_USER", payload: user}
-}
+// Sets icon
+export const setIcon = (icon) => ({ type: "SET_USERNAME", payload: icon })
+
+// Creates new room
+export const createRoom = () => ({ type: "CREATE_ROOM" })
+
+// Sets room
+export const joinRoom = (code, user) => ({ type: "JOIN_ROOM", payload: {code, user} })
+
+// Leaves room
+export const leaveRoom = () => ({ type: "LEAVE_ROOM" })

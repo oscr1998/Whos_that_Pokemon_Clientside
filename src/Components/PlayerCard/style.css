@@ -1,3 +1,7 @@
 .PlayerCard {
     visibility: visible;
 }
+
+.playerIcon{
+    width: 90px;
+}

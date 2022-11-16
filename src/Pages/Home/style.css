@@ -1,3 +1,24 @@
-.Home {
-    visibility: visible;
+.formContainer{
+    display: block;
+    background-color: white;
+    margin-left: auto;  
 }
+
+.nes-container{
+    display: flex;
+    margin-top: 5%;
+    margin-left: 35%;
+    margin-right: 35%;
+    padding: 4rem 4rem;
+    flex-direction: column;
+}
+
+.createRoom{
+    display: flex;
+    flex-direction: column;
+}
+
+.is-success {
+    width: 100%;
+}
+
