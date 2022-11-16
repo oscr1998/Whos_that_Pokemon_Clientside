@@ -4,11 +4,13 @@ import {Routes, Route} from 'react-router-dom'
 import pokeball from './Components/images/pokeball.svg'
 import title from './Components/images/Who.png'
 import './App.css'
+import MusicPlayer from './Components/MusicPlayer/index.js'
+
 export default function App() {
 
   return (
     <div className='App'>
-
+      <button onClick={MusicPlayer}>Music</button>
       <img className="title" src={title} alt="whos that pokemon title"></img>
       <div className="circlesContainer">
         <img className="circles" src={pokeball} alt="pokeball"></img>
