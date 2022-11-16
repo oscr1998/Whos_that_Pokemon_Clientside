@@ -59,7 +59,7 @@ async function fetchWrongPokemon(i) {
 
     setWrongChoice3(data[Math.floor(Math.random()*data.length)])
     
-    console.log("wrong choices:", wrongChoice1, wrongChoice2, wrongChoice3)
+    // console.log("wrong choices:", wrongChoice1, wrongChoice2, wrongChoice3)
     
   } catch(err){ console.error(err)
     console.log("FAIL FAIL");
@@ -83,8 +83,8 @@ function sendScore(){
 }
 
 function checkAnswer(e){
-  console.log(e.target.value)
-  console.log(e.target.id)
+  // console.log(e.target.value)
+  // console.log(e.target.id)
   let button1 = document.getElementById("1")
   let button2 = document.getElementById("2")
   let button3 = document.getElementById("3")
@@ -99,13 +99,25 @@ function checkAnswer(e){
     let button = document.getElementById(e.target.id)
     button.style.backgroundColor = "#92CC41"
     sendScore()
+
+    let correctDisplay = document.getElementById("correct")
+    correctDisplay.style.display= "block"
+
+    let answerbox = document.getElementById("parent")
+    answerbox.style.display= "none"
     // new Audio(correctMP3).play()
   } else{
     let button = document.getElementById(e.target.id)
     button.style.backgroundColor = "#E76E55"
+
+    let incorrectDisplay = document.getElementById("incorrect")
+    incorrectDisplay.style.display= "block"
+
+    let answerbox = document.getElementById("parent")
+    answerbox.style.display= "none"
     // new Audio(incorrectMP3).play()
   }
-  console.log(score)
+  // console.log(score)
 }
 function randomize(arr) {
   var i, j, tmp;
@@ -130,8 +142,8 @@ useEffect(() => {
     let quizTimer = setInterval(function(){
         if(rounds >0){
         roundTimer -= 1
-        console.log("roundTimer:", roundTimer)
-        console.log("roundNum:", rounds)
+        // console.log("roundTimer:", roundTimer)
+        // console.log("roundNum:", rounds)
         // END OF TIMER REVEAL POKEMON AND CORRECT ANSWER
         if(roundTimer === 0){
             let pokeImg = document.getElementById("filteredImg")
@@ -144,13 +156,15 @@ useEffect(() => {
             button2.disabled = true;
             button3.disabled = true;
             button4.disabled = true;
+            let answerbox = document.getElementById("parent")
+            answerbox.style.display= "none"
             }
 
         if(roundTimer === -3){
           roundTimer = 5
           rounds -= 1
-          console.log("roundNum in timer:", rounds)
-          console.log("#############")
+          // console.log("roundNum in timer:", rounds)
+          // console.log("#############")
           setRoundOver(prev => prev +1)
           setNumOfRounds(prev => prev -1)
           let button1 = document.getElementById("1")
@@ -168,6 +182,14 @@ useEffect(() => {
           button2.style.backgroundColor = "#F0F0F0"
           button3.style.backgroundColor = "#F0F0F0"
           button4.style.backgroundColor = "#F0F0F0"
+
+          let answerbox = document.getElementById("parent")
+          answerbox.style.display= "grid"
+
+          let incorrectDisplay = document.getElementById("incorrect")
+          incorrectDisplay.style.display= "none"
+          let correctDisplay = document.getElementById("correct")
+          correctDisplay.style.display= "none"
           }
         } else{
             console.log("game over")
@@ -181,10 +203,9 @@ useEffect(() => {
 // when 10 rounds have been completed, end game
     return (
     <div className='Game'>
-        <img id="filteredImg" src={sprite}></img>
         <Timer/>
+        <img id="filteredImg" src={sprite} className="whoPoke"></img>
         <div className='ImgContainer'>
-        <img src='' alt=""></img>
         </div>
         <div className='MultipleChoice'>
         <div id="parent" className="parent">
@@ -192,6 +213,16 @@ useEffect(() => {
             <button id="2" className="answer"value={possibleAnswers[1]} onClick={checkAnswer}>{possibleAnswers[1]}</button>
             <button id="3" className="answer" value={possibleAnswers[2]} onClick={checkAnswer}>{possibleAnswers[2]}</button>
             <button id="4" className="answer" value={possibleAnswers[3]} onClick={checkAnswer}>{possibleAnswers[3]}</button>
+        </div>
+        <br></br>
+        <br></br>
+        <div className="revealContainer">
+          <div className="correct" id="correct">
+            <h1>Correct! <i class="nes-icon is-large like"></i></h1>
+          </div>
+          <div className="incorrect" id="incorrect">
+            <h1>Incorrect <i class="nes-icon close is-large"></i></h1>
+          </div>
         </div>
     </div>
     </div>
