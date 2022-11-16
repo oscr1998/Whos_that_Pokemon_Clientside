@@ -3,6 +3,9 @@ import axios from "axios";
 import { Timer, Choices } from '../../Components'
 import './style.css'
 
+import incorrectMP3 from '../../Components/MusicPlayer/Sound/SFX/Mario_Fail.mp3'
+import correctMP3 from '../../Components/MusicPlayer/Sound/SFX/Pokemon_Item_Correct.mp3'
+
 export default function Game() {
   const [sprite, setSprite] = useState("");
   const [spriteName, setSpriteName]=useState("");
@@ -92,9 +95,11 @@ function checkAnswer(e){
   if(e.target.value == spriteName){
     let button = document.getElementById(e.target.id)
     button.style.backgroundColor = "#92CC41"
+    new Audio(correctMP3).play()
   } else{
     let button = document.getElementById(e.target.id)
     button.style.backgroundColor = "#E76E55"
+    new Audio(incorrectMP3).play()
   }
 }
 // gives points to user
