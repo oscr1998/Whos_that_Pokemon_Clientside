@@ -80,7 +80,7 @@ export default function Home() {
         <div className='form1 smallContainer'>
           <form name="createRoom" onSubmit={createRoomHandler} className="createRoom">
             <label>
-              Create a Room
+              Start a new game
               <input type="text" placeholder='Enter a Name' name='name' value={name} onChange={(e) => setName(e.target.value)} className="inputField nes-input" required></input>
             </label>
             <button className="nes-btn is-primary">Create Room</button>
@@ -90,7 +90,7 @@ export default function Home() {
         <div className='form2 smallContainer'>
           <form name="createRoom" onSubmit={joinRoomHandler}>
             <label>
-              Join an Existing Game
+              Or join an existing game
               <input type="text" placeholder='Enter a name' name='name' value={name} onChange={(e) => setName(e.target.value)} className='nes-input' required></input>
               <input type="text" placeholder='Enter room code' name='code' required className="inputField nes-input"></input>
             </label>
@@ -103,6 +103,7 @@ export default function Home() {
           <hr></hr>
           <NavLink to="/leaderboard" className="nes-btn is-warning">Global Leaderboard</NavLink>
         </div>
+        <button className='nes-btn is-disabled' disabled>Settings</button>
       </div>
     </div>
   )
