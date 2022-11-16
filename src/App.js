@@ -60,7 +60,18 @@ export default function App() {
       
       dispatch(joinRoom(code, user, others))
       navigate(`/rooms/${code}`)
+
     })
+
+    socket.on('startGame', () =>{
+      navigate("/game")
+      console.log("i work in the app")
+      })
+
+    socket.on('update-score', () =>{
+      console.log("updating score")
+      })
+
 
     return () => {
       console.log('APP CLEANUP');
@@ -69,6 +80,7 @@ export default function App() {
       socket.off('admin-message')
       socket.off('created-room')
       socket.off('joined-room')
+      socket.off('startGame')
     }
   }, [])
 
