@@ -115,7 +115,7 @@ function checkAnswer(e){
       <img id="filteredImg" src={sprite}></img>
       <Timer/>
       <div className='ImgContainer'>
-        <img src=''></img>
+        <img src='' alt=""></img>
       </div>
       <div className='MultipleChoice'>
         <div id="parent" className="parent">
