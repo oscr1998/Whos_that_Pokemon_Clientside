@@ -66,13 +66,16 @@ export default function Home() {
     socket.emit('join-existing-room', data.code)
   }
 
-  function leaveRoomHandler(){
-    dispatch(leaveRoom())
-  }
-
   return (
     <div className='Home'>
       <div className = "formContainer nes-container is-centered">
+      { room.code ?
+      (<div className='smallContainer'>
+        Hi {username}! You're already in room {room.code}.
+        <button onClick={() => navigate(`/rooms/${room.code}`)}>Rejoin</button>
+        <button onClick={() => dispatch(leaveRoom())}>Leave</button>
+      </div>) : 
+      <>
         <div className='form1 smallContainer'>
           <form name="createRoom" onSubmit={createRoomHandler} className="createRoom">
             <label>
@@ -84,25 +87,22 @@ export default function Home() {
           <hr></hr>
         </div>
         <div className='form2 smallContainer'>
-        <form name="createRoom" onSubmit={joinRoomHandler}>
-          <label>
-            Join an Existing Game
-            <input type="text" placeholder='Enter a name' name='name' defaultValue={username} required className='nes-input'></input>
-            <input type="text" placeholder='Enter room code' name='roomCode' required className="inputField nes-input"></input>
-          </label>
-          <input type="submit" value="Join" className="nes-btn is-success btn2"></input>
-        </form>
+          <form name="createRoom" onSubmit={joinRoomHandler}>
+            <label>
+              Join an Existing Game
+              <input type="text" placeholder='Enter a name' name='name' defaultValue={username} required className='nes-input'></input>
+              <input type="text" placeholder='Enter room code' name='roomCode' required className="inputField nes-input"></input>
+            </label>
+            <input type="submit" value="Join" className="nes-btn is-success btn2"></input>
+          </form>
         </div>
+        </>
+        }
         <div className='leaderboard'>
-        <hr></hr>
-        <NavLink to="/leaderboard" className="nes-btn is-warning">Global Leaderboard</NavLink>
+          <hr></hr>
+          <NavLink to="/leaderboard" className="nes-btn is-warning">Global Leaderboard</NavLink>
+        </div>
       </div>
-      </div>
-
-      
-
-      {/* ###################### */}
-
     </div>
   )
 }
