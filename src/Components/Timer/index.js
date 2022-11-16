@@ -9,7 +9,7 @@ export default function Timer() {
 
 // setInterval(makeAlert, 1000);
   useEffect(()=>{
-    var timeleft = 10;
+    var timeleft = 5;
     let quizTimer = setInterval(function(){
       if(timeleft <= 0){
         clearInterval(quizTimer);
@@ -23,7 +23,7 @@ export default function Timer() {
   return (
     <>
       <div className="round-time-bar">
-        <progress id="countdown" className="nes-progress is-primary" value="10" max="10"></progress>
+        <progress id="countdown" className="nes-progress is-primary" value="5" max="5"></progress>
       </div>
 
     </>

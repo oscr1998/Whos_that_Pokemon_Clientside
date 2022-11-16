@@ -26,7 +26,7 @@ export default function reducer(state = initState, action){
 
         case "SET_SCORE":
             console.log("SET_SCORE", action.payload);
-            return { ...state, score: action.payload }
+            return { ...state, score: state.score + action.payload }
 
         case "SET_ICON":
             return { ...state, icon: action.payload }

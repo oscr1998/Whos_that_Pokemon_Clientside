@@ -4,7 +4,7 @@ import { Routes, Route, useNavigate } from 'react-router-dom'
 import io from "socket.io-client"
 
 import { setUsername, createRoom, joinRoom, leaveRoom } from './Actions';
-import { Home, Leaderboard, Lobby, Game, NotFound } from './Pages'
+import { Home, Leaderboard, Lobby, Game, NotFound, Winner } from './Pages'
 import pokeball from './Components/images/pokeball.svg'
 import title from './Components/images/Who.png'
 
@@ -90,6 +90,7 @@ export default function App() {
           <Route path="/leaderboard" element={<Leaderboard/>}/>
           <Route path="/rooms/:code" element={<Lobby/>}/>
           <Route path="/game" element={<Game/>}/>
+          <Route path="/Winner" element={<Winner/>}/>
           <Route path="*" element={<NotFound/>}/>
         </Routes>
       </div>
