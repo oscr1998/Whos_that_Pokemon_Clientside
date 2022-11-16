@@ -5,11 +5,11 @@ import './style.css'
 
 
 import { useDispatch, useSelector } from 'react-redux';
-import { setUsername, createRoom, joinRoom, leaveRoom } from '../../Actions';
+import { setScore } from '../../Actions';
+import { useNavigate } from "react-router-dom";
 
 import incorrectMP3 from '../../Components/MusicPlayer/Sound/SFX/Mario_Fail.mp3'
 import correctMP3 from '../../Components/MusicPlayer/Sound/SFX/Pokemon_Item_Correct.mp3'
-
 
 export default function Game() {
   const [sprite, setSprite] = useState("");
@@ -19,6 +19,10 @@ export default function Game() {
   const [wrongChoice3, setWrongChoice3]=useState("");
   const [numOfRounds, setNumOfRounds]=useState(5);
   const [roundOver, setRoundOver]=useState(1);
+
+  const score = useSelector(state => state.score)
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
 
   async function fetchCorrectPokemon(i) {
     const fetchApi = `https://kakunamatata.herokuapp.com/pokemon/${i}`
@@ -68,19 +72,12 @@ useEffect(() => {
   fetchWrongPokemon(1)
 }, [spriteName])
 
-  function randomize(arr) {
-    var i, j, tmp;
-    for (i = arr.length - 1; i > 0; i--) {
-        j = Math.floor(Math.random() * (i + 1));
-        tmp = arr[i];
-        arr[i] = arr[j];
-        arr[j] = tmp;
-    }
-    return arr;
+function sendScore(){
+  dispatch({
+    type: "SET_SCORE", payload:(100)
+  })
 }
 
-// randomize(possibleAnswers)
-// choose answer and on selection it gives score, the quicker you answer the higher the score?
 function checkAnswer(e){
   console.log(e.target.value)
   console.log(e.target.id)
@@ -97,20 +94,31 @@ function checkAnswer(e){
   if(e.target.value == spriteName){
     let button = document.getElementById(e.target.id)
     button.style.backgroundColor = "#92CC41"
-    new Audio(correctMP3).play()
+    sendScore()
+    // new Audio(correctMP3).play()
   } else{
     let button = document.getElementById(e.target.id)
     button.style.backgroundColor = "#E76E55"
-    new Audio(incorrectMP3).play()
+    // new Audio(incorrectMP3).play()
   }
+  console.log(score)
 }
-
+function randomize(arr) {
+  var i, j, tmp;
+  for (i = arr.length - 1; i > 0; i--) {
+      j = Math.floor(Math.random() * (i + 1));
+      tmp = arr[i];
+      arr[i] = arr[j];
+      arr[j] = tmp;
+  }
+  return arr;
+}
 // Logic:
 // game starts on load
 // pokemon sprite and wrong answers generated on load
 let roundTimer = 5;
 let rounds = 5
-let possibleAnswers= [spriteName, wrongChoice1, wrongChoice2, wrongChoice3]
+let possibleAnswers = [spriteName, wrongChoice1, wrongChoice2, wrongChoice3]
 randomize(possibleAnswers)
 
 // timer starts, counts down, when timer hits 0, round is over and a new one starts
@@ -151,12 +159,18 @@ useEffect(() => {
           button4.disabled = false;
           let pokeImg = document.getElementById("filteredImg")
           pokeImg.style.filter= "brightness(0%)"
+
+          button1.style.backgroundColor = "#F0F0F0"
+          button2.style.backgroundColor = "#F0F0F0"
+          button3.style.backgroundColor = "#F0F0F0"
+          button4.style.backgroundColor = "#F0F0F0"
           }
         } else{
             console.log("game over")
         }
         if(rounds === 0){
           clearInterval(quizTimer);
+          navigate("/Winner")
         }
         },1000)
 }, [])
