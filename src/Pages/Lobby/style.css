@@ -1,3 +1,23 @@
+html, body {margin: 0; height: 100%; overflow: hidden}
+
 .Lobby {
     visibility: visible;
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    overflow: hidden; 
 }
+.lobbySettings{
+    background-color: white;
+    width: 80%;
+    margin-left: 20px;
+}
+
+.lobbyPlayers{
+    background-color: white;
+    display: flex;
+    padding: 1rem 1rem;
+    margin-left: 2%;
+    margin-right: 2%;
+}
+
+/* ################################## */

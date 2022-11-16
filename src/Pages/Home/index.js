@@ -155,37 +155,36 @@ export default function Home() {
     </div>)
   }
 
-
   return (
     <div className='Home'>
-      <div className = "formContainer">
+      <div className = "formContainer nes-container is-centered">
         <div className='form1 smallContainer'>
-          <form name="createRoom" onSubmit={createRoom}>
+          <form name="createRoom" onSubmit={createRoom} className="createRoom">
             <label>
-              Name
-              <input type="text" placeholder='Enter a Name' name='name' defaultValue={username} required className="inputField"></input>
+              Create a Room
+              <input type="text" placeholder='Enter a Name' name='name' defaultValue={username} required className="inputField nes-input"></input>
             </label>
-            <button>Create Room</button>
+            <button className="nes-btn is-primary">Create Room</button>
           </form>
+          <hr></hr>
         </div>
         <div className='form2 smallContainer'>
-        <form name="joinRoom" onSubmit={joinRoom}>
+        <form name="createRoom" onSubmit={joinRoom}>
           <label>
-            Room code
-            <input type="text" placeholder='Enter room code' name='roomCode' required className="inputField"></input>
+            Join an Existing Game
+            <input type="text" placeholder='Enter a name' name='name' defaultValue={username} required className='nes-input'></input>
+            <input type="text" placeholder='Enter room code' name='roomCode' required className="inputField nes-input"></input>
           </label>
-          <label>
-            Name
-            <input type="text" placeholder='Enter a name' name='name' defaultValue={username} required></input>
-          </label>
-          <input type="submit" value="Join"></input>
+          <input type="submit" value="Join" className="nes-btn is-success btn2"></input>
         </form>
         </div>
+        <div className='leaderboard'>
+        <hr></hr>
+        <NavLink to="/leaderboard" className="nes-btn is-warning">Global Leaderboard</NavLink>
+      </div>
       </div>
 
-      <div>
-        <NavLink to="/leaderboard">Leaderboard</NavLink>
-      </div>
+      
 
       {/* ###################### */}
 

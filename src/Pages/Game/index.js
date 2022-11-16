@@ -91,10 +91,10 @@ function checkAnswer(e){
   pokeImg.style.filter= "brightness(100%)"
   if(e.target.value == spriteName){
     let button = document.getElementById(e.target.id)
-    button.style.backgroundColor = "green"
+    button.style.backgroundColor = "#92CC41"
   } else{
     let button = document.getElementById(e.target.id)
-    button.style.backgroundColor = "red"
+    button.style.backgroundColor = "#E76E55"
   }
 }
 // gives points to user
@@ -107,21 +107,22 @@ function checkAnswer(e){
 
 // goes to end screen
   
+
+
+
   return (
     <div className='Game'>
-      <script src="jquery-1.6.1.js"></script>
-      <script src="my_jquery.js"></script>
       <img id="filteredImg" src={sprite}></img>
       <Timer/>
       <div className='ImgContainer'>
         <img src=''></img>
       </div>
       <div className='MultipleChoice'>
-        <div id="parent">
-          <button id="1" value={possibleAnswers[0]} onClick={checkAnswer}>{possibleAnswers[0]}</button>
-          <button id="2" value={possibleAnswers[1]} onClick={checkAnswer}>{possibleAnswers[1]}</button>
-          <button id="3" value={possibleAnswers[2]} onClick={checkAnswer}>{possibleAnswers[2]}</button>
-          <button id="4" value={possibleAnswers[3]} onClick={checkAnswer}>{possibleAnswers[3]}</button>
+        <div id="parent" className="parent">
+          <button id="1" className="answer" value={possibleAnswers[0]} onClick={checkAnswer}>{possibleAnswers[0]}</button>
+          <button id="2" className="answer"value={possibleAnswers[1]} onClick={checkAnswer}>{possibleAnswers[1]}</button>
+          <button id="3" className="answer" value={possibleAnswers[2]} onClick={checkAnswer}>{possibleAnswers[2]}</button>
+          <button id="4" className="answer" value={possibleAnswers[3]} onClick={checkAnswer}>{possibleAnswers[3]}</button>
         </div>
       </div>
     </div>

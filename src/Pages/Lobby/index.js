@@ -28,15 +28,24 @@ export default function Lobby() {
     // If local storage is different from redux state
   }, [])
 
+  // copy to clipboard
+  function copyToClipBoard() {
+     // Copy the text inside the text field
+    navigator.clipboard.writeText(window.location.href);
+    // Alert the copied text
+    alert("Copied the text: " + window.location.href);
+  }
+
+
   return (code === room.code || localStorage?.room.code === code) ? (
   // return (
-    <div className='Lobby'>
-      <div>
-        <div>Room {code} ({room.host} is host) </div>
-
-        <div>
+    <div className='Lobby '>
+      <div className="lobbySettings nes-container is-centered">
+        <div>Room {code} <br></br>({room.host} is host) <hr></hr></div>
+        <button onClick={copyToClipBoard}>Copy Room Link</button>
+        <div className="nes-select">
           <label>Choose Pokemon Generation:</label>
-          <select>
+          <select id="default_select">
             <option>All</option>
             <option>1</option>
             <option>2</option>
@@ -47,22 +56,25 @@ export default function Lobby() {
             <option>7</option>
             <option>8</option>
           </select>
+          <hr></hr>
         </div>
 
-        <div>
+        <div >
           <label>Number of rounds?:</label>
           <input type="number" defaultValue={10} min='1' max='10'></input>
         </div>
+        <NavLink to="/game" className="nes-btn is-error">START GAME</NavLink>
       </div>
 
-      <div>
+      <div className="lobbyPlayers nes-container is-centered">
         <h1>Players:</h1>
         {
           room.users.map(user => <PlayerCard key={user} name={user}/>)
         }
+        
       </div>
 
-      <NavLink to="/game">START GAME</NavLink>
+      
     </div>
   ) 
   : (

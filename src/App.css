@@ -1,5 +1,6 @@
 body{
 	background-image: url("./Components/images/bg.png");
+	z-index: 9;
 	background-size: 100% 100%;
 	background-repeat: no-repeat;
 	height: 100vh;
