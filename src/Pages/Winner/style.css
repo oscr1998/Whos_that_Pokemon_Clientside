@@ -1,3 +1,86 @@
 .Winner {
     visibility: visible;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    overflow: hidden; 
+}
+
+.container1{
+    background-color: white;
+    margin-left: 2%;
+    margin-right: 2%;
+}
+
+.container2{
+    background-color: white;
+    margin-left: 2%;
+    margin-right: 2%;
+}
+
+td {
+    vertical-align: bottom; /*Sinon les colonnes ne s'allignent pas vers le bas, logique*/
+    padding: 3px; /*Espacement entre chaques colonnes*/
+}
+#second, #first, #third {
+    width: 200px; /* Largeur de chaques colonnes*/
+}
+#first {
+    height: 200px;
+    background: #212529;
+}
+#second {
+    height: 150px;
+    background: #212529;
+}
+#third {
+    height: 100px;
+    background: #212529;
+}
+.text-center{
+  text-align:center;
+  font-size:40px;
+  font-family: 'Libre Franklin', sans-serif;
+  font-weight:900;
+}
+.text-inside{
+  text-align:center;
+  padding-top:20px;
+  color: white;
+  word-wrap: break-word;
+}
+.player{
+  font-size:20px;
+}
+
+.points{
+  padding-top:14px;
+  font-size:14px;
+  display: block;
+}
+
+#podium{
+ margin: 0 auto
+}
+
+.leaderboardContainer{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+.winBtn{
+    width: 300px;
+}
+
+.leaderBtn{
+    width: 400px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.btnDiv{
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    display: flex;
+    justify-content: space-around;
 }
