@@ -115,7 +115,9 @@ function checkAnswer(e){
 
     let answerbox = document.getElementById("parent")
     answerbox.style.display= "none"
-    // new Audio(correctMP3).play()
+    const correct = new Audio(correctMP3)
+    correct.volume = 0.1
+    correct.play()
   } else{
     let button = document.getElementById(e.target.id)
     button.style.backgroundColor = "#E76E55"
@@ -125,7 +127,9 @@ function checkAnswer(e){
 
     let answerbox = document.getElementById("parent")
     answerbox.style.display= "none"
-    // new Audio(incorrectMP3).play()
+    const incorrect = new Audio(incorrectMP3)
+    incorrect.volume = 0.1
+    incorrect.play()
   }
   // console.log(score)
 }
