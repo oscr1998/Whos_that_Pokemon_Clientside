@@ -9,6 +9,7 @@ const initState = {
     },
     isHost: false,
     gameGen: 0,
+    pickPoke: 0,
 }
 
 export default function reducer(state = initState, action){
@@ -48,6 +49,10 @@ export default function reducer(state = initState, action){
         case "PICK_GEN":
             console.log("PICK_GEN");
             return {...state, gameGen: action.payload}
+
+        case "PICK_POKE":
+            console.log("PICK_POKE");
+            return {...state, pickPoke: action.payload}
 
         case "ADD_USER":
             console.log("ADD_USER", action.payload)
