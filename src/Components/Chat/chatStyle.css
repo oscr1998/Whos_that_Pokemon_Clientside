@@ -1,0 +1,66 @@
+.chatContainer{
+    position: absolute;
+    background-color: #7FAD71;
+    bottom: 0;
+    left: 0;
+    margin: 1px;
+    width: 100%;
+    height: 200px;
+    border: none;
+    vertical-align: top;
+    padding: 0;
+    padding-left: 30px;
+}
+
+.chatContainer h2{
+    display: relative;
+    top: 0;
+    left: 0;
+    color: #bdf573;
+    padding: 0;
+    margin: 0;
+}
+
+.chatContainer h2{
+    display: relative;
+    top: 0;
+    left: 0;
+    color: #bdf573;
+    padding: 0;
+    margin: 0;
+}
+
+.chatContainer .chatInputText{
+    display: relative;
+    top: 0;
+    left: 0;
+    background-color: #bdf573;
+    color: #7FAD71;
+    padding: 0;
+    margin: 0;
+    border: none;
+}
+
+
+.chatContainer .chatInputText::placeholder{
+    color: rgb(75, 74, 74);
+}
+
+.chatContainer .chatInputButton{
+    border-color: #B0E46A;
+    background-color: #7FAD71;
+    width: 100px;
+    color: #bdf573;
+}
+
+
+
+.chatLayout{
+    display: grid;
+    grid-template-columns: 1fr 4fr;
+    grid-gap: 20px;
+}
+
+.convo{
+    color: #bdf573;
+}

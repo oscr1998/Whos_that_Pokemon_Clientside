@@ -69,6 +69,10 @@ async function fetchWrongPokemon(i) {
 //generate question
 useEffect(() => {
   fetchCorrectPokemon(randomNumber)
+  let title = document.getElementById("pokeTitle")
+  title.style.height= "60px"
+  title.style.width= "500px"
+  title.style.marginTop= "20px"
 }, [numOfRounds])
 
 useEffect(() => {
@@ -95,6 +99,7 @@ function checkAnswer(e){
   button3.disabled = true;
   button4.disabled = true;
   pokeImg.style.filter= "brightness(100%)"
+
   if(e.target.value == spriteName){
     let button = document.getElementById(e.target.id)
     button.style.backgroundColor = "#92CC41"

@@ -10,6 +10,7 @@ import title from './Components/images/Who.png'
 
 import './App.css'
 import MusicPlayer from './Components/MusicPlayer/index.js'
+import { Chat } from './Components';
 
 const serverEndpoint = "http://127.0.0.1:5001"
 const socket = io(serverEndpoint)
@@ -99,7 +100,7 @@ export default function App() {
       <div className='App'>
         <button onClick={MusicPlayer}>Music</button>
 
-        <img className="title" src={title} alt="whos that pokemon title"></img>
+        <img className="title" id="pokeTitle" src={title} alt="whos that pokemon title"></img>
         <div className="circlesContainer">
           {
             Array(10).fill().map((i, index) => (<img key={index} className="circles" src={pokeball} alt="pokeball"></img>))
@@ -115,14 +116,15 @@ export default function App() {
           <Route path="*" element={<NotFound/>}/>
         </Routes>
 
-        <div>
+        <Chat/>
+        {/* <div className='chatContainer nes-container with-title is-centered'>
           <h2>Chat</h2>
           <form onSubmit={sendChatMessage}>
             <input type='text' name='room' placeholder='Global channel'></input>
             <input type='text' name='message' placeholder='Message' required></input>
             <input type='submit' value='Send'></input>
           </form>
-        </div>
+        </div> */}
       </div>
     </SocketContext.Provider>
   )
