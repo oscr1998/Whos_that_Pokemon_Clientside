@@ -19,18 +19,19 @@ export default function Lobby() {
   const navigate = useNavigate()
 
   const socket = useContext(SocketContext)
+  
+  // UNCOMMENT THIS LATER
+  // useEffect(() => {
+  //   // Get local storage and store state
+  //   const localStorageData = JSON.parse(window.localStorage.getItem('state'))
 
-  useEffect(() => {
-    // Get local storage and store state
-    const localStorageData = JSON.parse(window.localStorage.getItem('state'))
-
-    if(localStorageData){
-      // Use local storage as source of truth
-      // Maybe replace with backend database in the future
-      dispatch(loadData(localStorageData))
-      //setLocalStorage(localStorageData) // UNCOMMENT THIS LINE LATER
-    }
-  }, [])
+  //   if(localStorageData){
+  //     // Use local storage as source of truth
+  //     // Maybe replace with backend database in the future
+  //     dispatch(loadData(localStorageData))
+  //     //setLocalStorage(localStorageData) 
+  //   }
+  // }, [])
 
   // copy to clipboard
   function copyToClipBoard() {
