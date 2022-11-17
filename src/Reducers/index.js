@@ -7,7 +7,8 @@ const initState = {
         users: [],
         host: ""
     },
-    isHost: false
+    isHost: false,
+    gameGen: 0,
 }
 
 export default function reducer(state = initState, action){
@@ -43,6 +44,10 @@ export default function reducer(state = initState, action){
         case "LEAVE_ROOM":
             console.log("LEAVE_ROOM");
             return {...state, room: initState.room, isHost: false }
+
+        case "PICK_GEN":
+            console.log("PICK_GEN");
+            return {...state, gameGen: action.payload}
 
         case "ADD_USER":
             console.log("ADD_USER", action.payload)

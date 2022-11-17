@@ -24,3 +24,6 @@ export const addUser = (user) => ({ type: "ADD_USER", payload: user })
 
 // EDIT AND SET SCORE
 export const setScore = (score) => ({ type: "SET_SCORE", payload: score})
+
+// PICK GEN
+export const setGen = (gen) => ({ type: "PICK_GEN", payload: gen})

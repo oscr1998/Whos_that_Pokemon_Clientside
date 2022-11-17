@@ -28,7 +28,8 @@ export default function Game() {
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const socket = useContext(SocketContext)
-
+  const gen = useSelector(state => state.gameGen)
+  console.log("@@@@@@@@@@@@", gen)
   async function fetchCorrectPokemon(i) {
     const fetchApi = `https://kakunamatata.herokuapp.com/pokemon/${i}`
     try {
@@ -42,8 +43,16 @@ export default function Game() {
     }
   }
 
+  let genRanges = [905 ,151, 100, 135, 108, 155, 72, 88, 96] 
+  let startNumbers = [1, 1, 152, 252, 387, 495, 650, 722, 810]
+
 // Round limit
-let randomNumber = Math.floor(Math.random()*151)
+let randomNumber
+if(gen === "All"){
+  randomNumber = Math.floor(Math.random()*(genRanges[0])+startNumbers[0])
+} else{
+  randomNumber = Math.floor(Math.random()*genRanges[gen]+startNumbers[gen])
+}
 // start round
 async function fetchWrongPokemon(i) {
     const fetchApi = `https://kakunamatata.herokuapp.com/pokemon/gen/${i}`
@@ -78,7 +87,7 @@ useEffect(() => {
 }, [numOfRounds])
 
 useEffect(() => {
-  fetchWrongPokemon(1)
+  fetchWrongPokemon(gen)
 }, [spriteName])
 
 function sendScore(){
@@ -140,7 +149,7 @@ function randomize(arr) {
 // game starts on load
 // pokemon sprite and wrong answers generated on load
 let roundTimer = 5;
-let rounds = 5
+let rounds = 10
 let possibleAnswers = [spriteName, wrongChoice1, wrongChoice2, wrongChoice3]
 randomize(possibleAnswers)
 
