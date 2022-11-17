@@ -91,10 +91,13 @@ useEffect(() => {
 }, [spriteName])
 
 function sendScore(){
+  const addScore = 100
+
   dispatch({
-    type: "SET_SCORE", payload:(100)
+    type: "ADD_SCORE", payload: addScore
   })
-  socket.emit('update-score', {score, room: room.code })
+
+  socket.emit('update-score', { room: room.code, score: addScore })
 }
 
 function checkAnswer(e){
@@ -121,7 +124,9 @@ function checkAnswer(e){
 
     let answerbox = document.getElementById("parent")
     answerbox.style.display= "none"
-    // new Audio(correctMP3).play()
+    const correct = new Audio(correctMP3)
+    correct.volume = 0.1
+    correct.play()
   } else{
     let button = document.getElementById(e.target.id)
     button.style.backgroundColor = "#E76E55"
@@ -131,7 +136,9 @@ function checkAnswer(e){
 
     let answerbox = document.getElementById("parent")
     answerbox.style.display= "none"
-    // new Audio(incorrectMP3).play()
+    const incorrect = new Audio(incorrectMP3)
+    incorrect.volume = 0.1
+    incorrect.play()
   }
   // console.log(score)
 }
@@ -234,10 +241,10 @@ useEffect(() => {
         <br></br>
         <div className="revealContainer">
           <div className="correct" id="correct">
-            <h1>Correct! <i class="nes-icon is-large like"></i></h1>
+            <h1>Correct! <i className="nes-icon is-large like"></i></h1>
           </div>
           <div className="incorrect" id="incorrect">
-            <h1>Incorrect <i class="nes-icon close is-large"></i></h1>
+            <h1>Incorrect <i className="nes-icon close is-large"></i></h1>
           </div>
         </div>
     </div>

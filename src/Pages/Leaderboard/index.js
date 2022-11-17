@@ -6,6 +6,7 @@ import './style.css'
 
 export default function Leaderboard() {
   const room = useSelector(state => state.room)
+
   const [topScorers, setTopScorers]=useState([]);
   const [topScorersArray, setTopScorersArray]=useState([]);
   const navigate = useNavigate()
@@ -13,10 +14,12 @@ export default function Leaderboard() {
     const fetchApi = `https://kakunamatata.herokuapp.com/users`
     try {
       const apiData = await axios.get(fetchApi);
-      let {data} = await apiData
+      const data = apiData.data.map(user => user.name)
       console.log("in fetch", data)
-      setTopScorers(data)
-  } catch(err){ console.error(err)
+      setTopScorers(data.sort((a, b) => {
+				return b.score - a.score;
+    }))
+     } catch(err){ console.error(err)
     console.log("FAIL FAIL");
   }
 }
@@ -25,6 +28,9 @@ export default function Leaderboard() {
     fetchTopUsers()
     console.log("top", topScorers)
   }, [])
+
+
+
   
   return (
     <div className='Leaderboard nes-container with-title is-centered'>
@@ -35,22 +41,15 @@ export default function Leaderboard() {
         <div className>
           <h3>Players:</h3>
           <ol className="none">
-            <li>test</li>
-            <li>test</li>
-            <li>test</li>
-            <li>test</li>
-            <li>test</li>
+
+            {topScorers.slice(0, 5).map(user =><li>{user.name}</li> )}
           </ol>
         </div>
 
       <div>
         <h3>Scores:</h3>
           <ul className="nes-list is-circle">
-            <li>1</li>
-            <li>1</li>
-            <li>1</li>
-            <li>1</li>
-            <li>1</li>
+          {topScorers.slice(0, 5).map(user =><li>{user.score}</li> )}
           </ul>
         </div>
       </div>

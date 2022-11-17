@@ -3,7 +3,8 @@ import { useDispatch } from 'react-redux';
 import { Routes, Route, useNavigate } from 'react-router-dom'
 import io from "socket.io-client"
 
-import { addUser, createRoom, joinRoom, leaveRoom, setGen } from './Actions';
+import { addUser, createRoom, joinRoom, leaveRoom, updateUser, setGen } from './Actions';
+
 import { Home, Leaderboard, Lobby, Game, NotFound, Winner } from './Pages'
 import pokeball from './Components/images/pokeball.svg'
 import title from './Components/images/Who.png'
@@ -74,8 +75,9 @@ export default function App() {
       console.log("i work in the app")
     })
 
-    socket.on('updated-score', ({ user, score }) =>{
-      console.log(`Update ${user.name}'s score to ${score}`)
+    socket.on('updated-score', ({ user }) =>{
+      console.log(`Update ${user.name}'s score to ${user.score}`)
+      dispatch(updateUser(user))
     })
 
     socket.on('new-message', ({ user, msg }) =>{
