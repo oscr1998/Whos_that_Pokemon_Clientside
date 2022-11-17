@@ -40,9 +40,10 @@ var timeToGuess = 5
       <div className="round-time-bar">
         <div className='timerCounter'>
           <h2>Time left of round:{time}</h2>
-          <h2>Time left to guess:{timeGuess}</h2>
         </div>
-        <progress id="countdown" className="nes-progress is-primary" value={time} max="8"></progress>
+        <div className='timeLeft'>
+          <progress id="countdown" className="nes-progress is-primary" value={timeGuess} max="5"></progress>
+        </div>
       </div>
 
     </>
