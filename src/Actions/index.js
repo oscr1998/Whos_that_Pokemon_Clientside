@@ -19,5 +19,8 @@ export const joinRoom = (code, user, users) => ({ type: "JOIN_ROOM", payload: {c
 // Leaves room
 export const leaveRoom = () => ({ type: "LEAVE_ROOM" })
 
+// Adds user to room
+export const addUser = (user) => ({ type: "ADD_USER", payload: user })
+
 // EDIT AND SET SCORE
 export const setScore = (score) => ({ type: "SET_SCORE", payload: score})

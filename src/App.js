@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux';
 import { Routes, Route, useNavigate } from 'react-router-dom'
 import io from "socket.io-client"
 
-import { createRoom, joinRoom, leaveRoom } from './Actions';
+import { addUser, createRoom, joinRoom, leaveRoom } from './Actions';
 import { Home, Leaderboard, Lobby, Game, NotFound, Winner } from './Pages'
 import pokeball from './Components/images/pokeball.svg'
 import title from './Components/images/Who.png'
@@ -53,26 +53,34 @@ export default function App() {
       dispatch(createRoom(code))
     })
     
-    socket.on('joined-room', ({ msg, code, user, others }) => {
-      if(others.length < 1)
+    socket.on('joined-room', ({ msg, code, user, users }) => {
+      if(user.isHost)
         console.log("CREATED ROOM", code, user);
       else
-        console.log("JOINED", user, JSON.stringify(others), code)
+        console.log("JOINED", user, JSON.stringify(users), code)
       
-      dispatch(joinRoom(code, user, others))
+      dispatch(joinRoom(code, user, users))
       navigate(`/rooms/${code}`)
 
+    })
+
+    socket.on('user-joined', ({ user }) =>{
+      console.log('User joined', user)
+      //dispatch(addUser(user))
     })
 
     socket.on('started-game', () =>{
       navigate("/game")
       console.log("i work in the app")
-      })
+    })
 
-    socket.on('update-score', () =>{
-      console.log("updating score")
-      })
+    socket.on('updated-score', ({ user, score }) =>{
+      console.log(`Update ${user.name}'s score to ${score}`)
+    })
 
+    socket.on('new-message', ({ user, msg }) =>{
+      console.log(`${user.name}: ${msg}`)
+    })
 
     return () => {
       console.log('APP CLEANUP');

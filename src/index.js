@@ -11,6 +11,7 @@ const setLocalStorage = (key, value) => window.localStorage.setItem(key, JSON.st
 const store = createStore(reducer)
 
 store.subscribe(() => {
+  console.log('CURRENT STATE', store.getState())
   window.localStorage.setItem('state', JSON.stringify(store.getState()))
 })
 

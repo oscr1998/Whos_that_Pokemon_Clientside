@@ -22,6 +22,8 @@ export default function Game() {
   const [numOfRounds, setNumOfRounds]=useState(5);
   const [roundOver, setRoundOver]=useState(1);
 
+  const user = useSelector(state => state)
+  const room = useSelector(state => state.room)
   const score = useSelector(state => state.score)
   const dispatch = useDispatch()
   const navigate = useNavigate()
@@ -83,7 +85,7 @@ function sendScore(){
   dispatch({
     type: "SET_SCORE", payload:(100)
   })
-  socket.emit('update-score', {score: score})
+  socket.emit('update-score', {score, room: room.code })
 }
 
 function checkAnswer(e){
