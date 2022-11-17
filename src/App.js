@@ -80,10 +80,6 @@ export default function App() {
       dispatch(updateUser(user))
     })
 
-    socket.on('new-message', ({ user, msg }) =>{
-      console.log(`${JSON.stringify(user.name)}: ${msg}`)
-    })
-
     socket.on('setting-generation', ({gen}) =>{
       console.log("GEN GEN GEN", gen)
       dispatch(setGen(gen))
