@@ -6,6 +6,7 @@ module.exports = defineConfig({
 
   viewportWidth: 1600,
   viewportHeight: 900,
+  video: false,
 
   e2e: {
     setupNodeEvents(on, config) {
