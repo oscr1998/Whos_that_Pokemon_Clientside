@@ -12,7 +12,7 @@ export default function Chat() {
         const { room, message } = data
     
         socket.emit('chat-message', { room, message })
-        }
+    }
 
     return (
     <div className='chatContainer nes-container with-title'>

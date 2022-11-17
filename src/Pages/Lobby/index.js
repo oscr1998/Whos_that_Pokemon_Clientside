@@ -19,22 +19,19 @@ export default function Lobby() {
   const navigate = useNavigate()
 
   const socket = useContext(SocketContext)
+  
+  // UNCOMMENT THIS LATER
+  // useEffect(() => {
+  //   // Get local storage and store state
+  //   const localStorageData = JSON.parse(window.localStorage.getItem('state'))
 
-  useEffect(() => {
-    // Get local storage and store state
-    const localStorageData = JSON.parse(window.localStorage.getItem('data'))
-
-    if(localStorageData){
-      // Use local storage as source of truth
-      // Maybe replace with backend database in the future
-      dispatch(loadData(localStorageData))
-      setLocalStorage(localStorageData)
-    }
-
-    console.log(room)
-
-    // If local storage is different from redux state
-  }, [])
+  //   if(localStorageData){
+  //     // Use local storage as source of truth
+  //     // Maybe replace with backend database in the future
+  //     dispatch(loadData(localStorageData))
+  //     //setLocalStorage(localStorageData) 
+  //   }
+  // }, [])
 
   // copy to clipboard
   function copyToClipBoard() {
@@ -110,7 +107,9 @@ export default function Lobby() {
   ) 
   : (
     <div>
-      Wrong room! Are you looking for room {room.code}
+      <p>You're in the wrong place! {room.code && <> Are you looking for room {room.code}? </>}</p>
+      
+      {room.code && <button onClick={() => navigate(`/rooms/${room.code}`)}>Rejoin</button>}
       <button onClick={() => navigate('/')}>&larr; Go back home</button>
     </div>
   )

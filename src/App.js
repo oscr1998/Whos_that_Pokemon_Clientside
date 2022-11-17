@@ -81,7 +81,7 @@ export default function App() {
     })
 
     socket.on('new-message', ({ user, msg }) =>{
-      console.log(`${user.name}: ${msg}`)
+      console.log(`${JSON.stringify(user.name)}: ${msg}`)
     })
 
     socket.on('setting-generation', ({gen}) =>{
