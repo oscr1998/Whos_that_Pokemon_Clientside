@@ -3,7 +3,8 @@ import { useDispatch } from 'react-redux';
 import { Routes, Route, useNavigate } from 'react-router-dom'
 import io from "socket.io-client"
 
-import { addUser, createRoom, joinRoom, leaveRoom, updateUser } from './Actions';
+import { addUser, createRoom, joinRoom, leaveRoom, updateUser, setGen } from './Actions';
+
 import { Home, Leaderboard, Lobby, Game, NotFound, Winner } from './Pages'
 import pokeball from './Components/images/pokeball.svg'
 import title from './Components/images/Who.png'
@@ -83,6 +84,11 @@ export default function App() {
       console.log(`${user.name}: ${msg}`)
     })
 
+    socket.on('setting-generation', ({gen}) =>{
+      console.log("GEN GEN GEN", gen)
+      dispatch(setGen(gen))
+    })
+
     return () => {
       console.log('APP CLEANUP');
       socket.off('connect')
@@ -91,6 +97,7 @@ export default function App() {
       socket.off('created-room')
       socket.off('joined-room')
       socket.off('startGame')
+      socket.off('setting-generation')
     }
   }, [])
 

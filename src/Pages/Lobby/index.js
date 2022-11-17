@@ -2,7 +2,7 @@ import React, { useEffect, useState, useContext } from 'react'
 import { PlayerCard } from '../../Components'
 import { NavLink, useNavigate, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { loadData, leaveRoom } from '../../Actions';
+import { loadData, leaveRoom, setGen } from '../../Actions';
 import './style.css'
 
 import { SocketContext } from '../../App';
@@ -52,6 +52,11 @@ export default function Lobby() {
     navigate('/')
   }
 
+  function selectGeneration(e){
+    dispatch(setGen(e.target.value))
+    socket.emit('set-generation', { gen: e.target.value, room: code})
+  }
+
   return (room.code === code) ? (
   // return (
     <div className='Lobby '>
@@ -60,7 +65,7 @@ export default function Lobby() {
             <button onClick={copyToClipBoard}>Copy Room Code</button>
           <div className="nes-select">
             <label>Choose Pokemon Generation:</label>
-          <select id="default_select" disabled={!user.isHost}>
+          <select id="default_select" disabled={!user.isHost} onChange={selectGeneration}>
             <option>All</option>
             <option>1</option>
             <option>2</option>

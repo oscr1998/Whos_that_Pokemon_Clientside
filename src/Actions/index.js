@@ -25,5 +25,9 @@ export const leaveRoom = () => ({ type: "LEAVE_ROOM" })
 // EDIT AND SET SCORE
 export const setScore = (score) => ({ type: "SET_SCORE", payload: score})
 
+// PICK GEN
+export const setGen = (gen) => ({ type: "PICK_GEN", payload: gen})
+
 // Updates
 export const updateUser = (user) => ({ type: "UPDATE_USER", payload: user })
+
