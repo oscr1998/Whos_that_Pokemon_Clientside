@@ -3,6 +3,7 @@ import { Podium } from '../../Components'
 import './style.css'
 import { useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
+import Champion from '../../Components/MusicPlayer/champion';
 
 export default function Winner() {
   const users = useSelector(state => state.room.users)
@@ -21,6 +22,7 @@ export default function Winner() {
 
   return (
     <div>
+        <button onClick={Champion}>Machampion's Anthem</button>
     <div className='Winner'>
       <div className="container1 nes-container with-title is-centered">
         <h1><i className="nes-icon trophy is-large"></i>        MACHAMPIONS       <i className="nes-icon trophy is-large"></i></h1>
