@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux'
 import axios from "axios";
 import { useNavigate } from 'react-router-dom'
 import './style.css'
+import Champion from '../../Components/MusicPlayer/champion';
 
 export default function Leaderboard() {
   const room = useSelector(state => state.room)
@@ -35,6 +36,7 @@ export default function Leaderboard() {
   return (
     <div className='Leaderboard nes-container with-title is-centered'>
       <h1>Global Highscores</h1>
+      <button onClick={Champion}>Machampion's Anthem</button>
       <br/>
       <br/>
       <div className="leaderboardContainer">
