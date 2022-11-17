@@ -41,7 +41,7 @@ export default function Lobby() {
      // Copy the text inside the text field
     navigator.clipboard.writeText(code);
     // Alert the copied text
-    alert("Copied the text: " + code);
+    // alert("Copied the text: " + code);
   }
 
   function startGameHandler(){

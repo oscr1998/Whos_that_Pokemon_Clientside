@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux';
 import { Routes, Route, useNavigate } from 'react-router-dom'
 import io from "socket.io-client"
 
-import { addUser, createRoom, joinRoom, leaveRoom, updateUser, setGen } from './Actions';
+import { addUser, createRoom, joinRoom, leaveRoom, updateUser, setGen, setPoke } from './Actions';
 
 import { Home, Leaderboard, Lobby, Game, NotFound, Winner } from './Pages'
 import pokeball from './Components/images/pokeball.svg'
@@ -87,6 +87,11 @@ export default function App() {
     socket.on('setting-generation', ({gen}) =>{
       console.log("GEN GEN GEN", gen)
       dispatch(setGen(gen))
+    })
+
+    socket.on('setting-pokemon', ({num}) =>{
+      console.log("set poke:", num)
+      dispatch(setPoke(num))
     })
 
     return () => {

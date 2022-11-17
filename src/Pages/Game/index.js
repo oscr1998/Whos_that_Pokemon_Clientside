@@ -6,7 +6,7 @@ import './style.css'
 
 import { useDispatch, useSelector } from 'react-redux';
 import { setScore } from '../../Actions';
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 import incorrectMP3 from '../../Components/MusicPlayer/Sound/SFX/Mario_Fail.mp3'
 import correctMP3 from '../../Components/MusicPlayer/Sound/SFX/Pokemon_Item_Correct.mp3'
@@ -25,14 +25,18 @@ export default function Game() {
   const user = useSelector(state => state)
   const room = useSelector(state => state.room)
   const score = useSelector(state => state.score)
+
   const dispatch = useDispatch()
   const navigate = useNavigate()
+
   const socket = useContext(SocketContext)
   const gen = useSelector(state => state.gameGen)
-  console.log("@@@@@@@@@@@@", gen)
+  const pokeNum = useSelector(state => state.pickPoke)
+
   async function fetchCorrectPokemon(i) {
     const fetchApi = `https://kakunamatata.herokuapp.com/pokemon/${i}`
     try {
+      console.log(`https://kakunamatata.herokuapp.com/pokemon/${i}`)
         const apiData = await axios.get(fetchApi);
         const dataImage = await apiData.data.image
         const dataName = await apiData.data.name
@@ -79,6 +83,8 @@ async function fetchWrongPokemon(i) {
 
 //generate question
 useEffect(() => {
+  socket.emit('pokemon-select', { num: randomNumber, room: room.code})
+  console.log("pokeNum", pokeNum)
   fetchCorrectPokemon(randomNumber)
   let title = document.getElementById("pokeTitle")
   title.style.height= "60px"

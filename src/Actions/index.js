@@ -28,6 +28,9 @@ export const setScore = (score) => ({ type: "SET_SCORE", payload: score})
 // PICK GEN
 export const setGen = (gen) => ({ type: "PICK_GEN", payload: gen})
 
+// PICK Poke
+export const setPoke = (poke) => ({ type: "PICK_POKE", payload: poke})
+
 // Updates
 export const updateUser = (user) => ({ type: "UPDATE_USER", payload: user })
 
