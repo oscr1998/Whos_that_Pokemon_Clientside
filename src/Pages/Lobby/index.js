@@ -39,9 +39,9 @@ export default function Lobby() {
   // copy to clipboard
   function copyToClipBoard() {
      // Copy the text inside the text field
-    navigator.clipboard.writeText(window.location.href);
+    navigator.clipboard.writeText(code);
     // Alert the copied text
-    alert("Copied the text: " + window.location.href);
+    alert("Copied the text: " + code);
   }
 
   function startGameHandler(){
@@ -61,7 +61,7 @@ export default function Lobby() {
     <div className='Lobby '>
         <div className="lobbySettings nes-container is-centered">
           <div>Room {code} <br></br>({room.host} is host) <hr></hr></div>
-            <button onClick={copyToClipBoard}>Copy Room Link</button>
+            <button onClick={copyToClipBoard}>Copy Room Code</button>
           <div className="nes-select">
             <label>Choose Pokemon Generation:</label>
           <select id="default_select" disabled={!user.isHost}>
@@ -94,8 +94,8 @@ export default function Lobby() {
       <div className="lobbyPlayers nes-container is-centered">
         <h1>Players ({room.users.length})</h1>
 
-        <div>
-          { room.users.map(user => <PlayerCard key={user.name} name={user.name} icon={user.icon}/>) }
+        <div className='iconGrid'>
+          { room.users.map(user => <PlayerCard className="oneIcon" key={user.name} name={user.name} icon={user.icon}/>) }
         </div>
         
       </div>
