@@ -82,10 +82,13 @@ useEffect(() => {
 }, [spriteName])
 
 function sendScore(){
+  const addScore = 100
+
   dispatch({
-    type: "SET_SCORE", payload:(100)
+    type: "ADD_SCORE", payload: addScore
   })
-  socket.emit('update-score', {score, room: room.code })
+
+  socket.emit('update-score', { room: room.code, score: addScore })
 }
 
 function checkAnswer(e){
@@ -225,10 +228,10 @@ useEffect(() => {
         <br></br>
         <div className="revealContainer">
           <div className="correct" id="correct">
-            <h1>Correct! <i class="nes-icon is-large like"></i></h1>
+            <h1>Correct! <i className="nes-icon is-large like"></i></h1>
           </div>
           <div className="incorrect" id="incorrect">
-            <h1>Incorrect <i class="nes-icon close is-large"></i></h1>
+            <h1>Incorrect <i className="nes-icon close is-large"></i></h1>
           </div>
         </div>
     </div>

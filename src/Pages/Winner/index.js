@@ -1,24 +1,23 @@
-import React, {useState} from 'react'
+import React, {useEffect, useState} from 'react'
 import { Podium } from '../../Components'
 import './style.css'
 import { useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 
 export default function Winner() {
-  const data = useSelector(state => state)
-  let array = data.room.users
-  const myProfile = {name: data.username,score: data.score}
-  console.log(array)
-  console.log(myProfile)
+  const users = useSelector(state => state.room.users)
+  // const data = useSelector(state => state)
+  // let array = data.room.users
+  // const myProfile = {name: data.username,score: data.score}
+  // console.log(array)
+  // console.log(myProfile)
 
-  function addProfile(){
-    array.push(myProfile)
-  }
-  addProfile()
 
-  array.sort(function(a, b) {
-    return b.score - a.score;
-  });
+  useEffect(() => {
+    users.sort(function(a, b) {
+      return b.score - a.score;
+    })
+  }, [])
 
   return (
     <div>
@@ -32,10 +31,10 @@ export default function Winner() {
                 <div className="text-center">2nd</div>
                 <div id="second"><div className="text-inside">
                     <span className="player">
-                    {array[1].name}
+                      {users[1]?.name}
                     </span>
                     <span className="points">
-                    Points: {array[0].score}
+                    Points: {users[0]?.score}
                     </span>
                   </div>
                   </div>
@@ -45,10 +44,10 @@ export default function Winner() {
                 <div id="first">
                 <div className="text-inside">
                     <span className="player">
-                    {array[0].name}
+                      {users[0]?.name}
                     </span>
                     <span className="points">
-                    Points: {array[0].score}
+                    Points: {users[0]?.score}
                     </span>
                   </div>
                 </div>
@@ -58,10 +57,10 @@ export default function Winner() {
                 <div id="third">
                   <div className="text-inside">
                     <span className="player">
-                    {array[2].name}
+                      {users[2]?.name}
                     </span>
                     <span className="points">
-                    Points: {array[2].score}
+                    Points: {users[2]?.score}
                     </span>
                   </div>
                 </div>
@@ -75,17 +74,17 @@ export default function Winner() {
           <h1>Game Leaderboard:</h1>
 
           <div className="leaderboardContainer">
-            <div className>
+            <div className="">
               <h3>Players:</h3>
               <ol className="none">
-                {array.map(el => <li>{el.name}</li>)}
+                {users.map(el => <li key={el.name}>{el.name}</li>)}
               </ol>
             </div>
 
             <div>
             <h3>Scores:</h3>
               <ul className="nes-list is-circle">
-                {array.map(el => <li>{el.score}</li>)}
+                {users.map(el => <li key={el.name}>{el.score}</li>)}
               </ul>
             </div>
           </div>

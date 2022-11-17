@@ -19,15 +19,15 @@ export default function reducer(state = initState, action){
             return initState
 
         case "SET_NAME":
-            console.log("SET_NAME", action.payload);
+            console.log("SET_NAME", action.payload)
             return { ...state, name: action.payload }
 
-        case "SET_SCORE":
-            console.log("SET_SCORE", action.payload);
+        case "ADD_SCORE":
+            console.log("ADD_SCORE", action.payload)
             return { ...state, score: state.score + action.payload }
 
         case "SET_ICON":
-            console.log("SET_ICON", action.payload);
+            console.log("SET_ICON", action.payload)
             return { ...state, icon: action.payload }
 
         case "CREATE_ROOM":
@@ -44,12 +44,14 @@ export default function reducer(state = initState, action){
             console.log("LEAVE_ROOM");
             return {...state, room: initState.room, isHost: false }
 
-        case "ADD_USER":
-            console.log("ADD_USER", action.payload)
-            // const {name, icon, score, index} = action.payload
-            // const newUser = { name, icon, score}
-            // console.log("NEW USER", newUser)
-            return state
+        case "UPDATE_USER":
+            console.log("UPDATE_USER", action.payload)
+
+            const index = action.payload.index - 1
+            const updatedUsers = state.room.users
+            updatedUsers[index] = action.payload
+
+            return {...state, room: {...state.room, users: updatedUsers}}
 
         default:
             return state
