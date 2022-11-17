@@ -92,16 +92,11 @@ export default function Lobby() {
       </div>
       {/* <NavLink to="/game" className="nes-btn is-error">START GAME</NavLink>  */}
       <div className="lobbyPlayers nes-container is-centered">
-        <h1>Players:</h1>
+        <h1>Players ({room.users.length})</h1>
 
         <div>
-          <h3>You</h3>
-          <PlayerCard name={user.name} icon={user.icon}/>
+          { room.users.map(user => <PlayerCard key={user.name} name={user.name} icon={user.icon}/>) }
         </div>
-
-        {
-          room.users.map(user => {<PlayerCard key={user.name} name={user.name} icon={user.icon}/>})
-        }
         
       </div>
       

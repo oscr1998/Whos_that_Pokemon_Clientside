@@ -52,6 +52,7 @@ export default function Home() {
 
   useEffect(() => {
     // get user data from local storage
+    dispatch(setIcon(getRandomIcon()))
   }, [])
 
   useEffect(() => {
@@ -62,9 +63,8 @@ export default function Home() {
     e.preventDefault()
 
     dispatch(setName(username))
-    dispatch(setIcon(getRandomIcon()))
     
-    socket.emit('create-new-room', { name: username })
+    socket.emit('create-new-room', { name: username, icon: user.icon })
   }
   
   function joinRoomHandler(e) {
@@ -73,9 +73,10 @@ export default function Home() {
     const data = getFormData(e.target)
 
     dispatch(setName(username))
-    dispatch(setIcon(getRandomIcon()))
 
-    socket.emit('join-existing-room', { room: data.code, name: username })
+    console.log(`${user.name}'s icon ${user.icon}`);
+    socket.emit('join-existing-room', { room: data.code, name: username, icon: user.icon })
+
   }
 
   return (
