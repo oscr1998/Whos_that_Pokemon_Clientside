@@ -83,7 +83,6 @@ async function fetchWrongPokemon(i) {
   }
 }
 
-
 //generate question
 useEffect(() => {
   socket.emit('pokemon-select', { num: randomNumber, room: room.code})
