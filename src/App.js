@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux';
 import { Routes, Route, useNavigate } from 'react-router-dom'
 import io from "socket.io-client"
 
-import { setUsername, createRoom, joinRoom, leaveRoom } from './Actions';
+import { createRoom, joinRoom, leaveRoom } from './Actions';
 import { Home, Leaderboard, Lobby, Game, NotFound, Winner } from './Pages'
 import pokeball from './Components/images/pokeball.svg'
 import title from './Components/images/Who.png'
@@ -54,16 +54,16 @@ export default function App() {
     
     socket.on('joined-room', ({ msg, code, user, others }) => {
       if(others.length < 1)
-        console.log(user, "CREATED ROOM", code);
+        console.log("CREATED ROOM", code, user);
       else
-        console.log(user, "JOINED", JSON.stringify(others), "IN ROOM", code)
+        console.log("JOINED", user, JSON.stringify(others), code)
       
       dispatch(joinRoom(code, user, others))
       navigate(`/rooms/${code}`)
 
     })
 
-    socket.on('startGame', () =>{
+    socket.on('started-game', () =>{
       navigate("/game")
       console.log("i work in the app")
       })

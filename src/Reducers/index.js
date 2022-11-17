@@ -1,25 +1,10 @@
 const initState = {
-    username: "oliver",
+    name: "",
     icon: "",
-    score: 12,
+    score: 0,
     room: {
         code: "",
-        name: "",
-        users: [
-            {
-                name: 'sean',
-                score: 1000
-            },
-            {
-                name: 'kornelia',
-                score: 1001
-            },
-            {
-                name: 'ami',
-                score: 50
-            },
-        ],
-        state: "",
+        users: [],
         host: ""
     },
     isHost: false
@@ -33,20 +18,21 @@ export default function reducer(state = initState, action){
         case "CLEAR_DATA":
             return initState
 
-        case "SET_USERNAME":
-            console.log("SET_USERNAME", action.payload);
-            return { ...state, username: action.payload }
+        case "SET_NAME":
+            console.log("SET_NAME", action.payload);
+            return { ...state, name: action.payload }
 
         case "SET_SCORE":
             console.log("SET_SCORE", action.payload);
             return { ...state, score: state.score + action.payload }
 
         case "SET_ICON":
+            console.log("SET_ICON", action.payload);
             return { ...state, icon: action.payload }
 
         case "CREATE_ROOM":
             console.log("CREATE_ROOM");
-            return { ...state, room: { ...state.room, host: state.username }, isHost: true }
+            return { ...state, room: { ...state.room, host: state.name }, isHost: true }
 
         case "JOIN_ROOM":
             const users = action.payload.users
@@ -55,6 +41,7 @@ export default function reducer(state = initState, action){
             return { ...state, room: { ...state.room, code: action.payload.code, users }}
 
         case "LEAVE_ROOM":
+            console.log("LEAVE_ROOM");
             return {...state, room: initState.room, isHost: false }
 
         default:

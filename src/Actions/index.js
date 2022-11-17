@@ -4,8 +4,8 @@ export const loadData = (data) => ({type: "LOAD_DATA", payload: data})
 // Clears all data from redux state
 export const clearData = () => ({type: "LOAD_DATA"})
 
-// Sets username
-export const setUsername = (name) => ({ type: "SET_USERNAME", payload: name })
+// Sets name
+export const setName = (name) => ({ type: "SET_NAME", payload: name })
 
 // Sets icon
 export const setIcon = (icon) => ({ type: "SET_ICON", payload: icon })

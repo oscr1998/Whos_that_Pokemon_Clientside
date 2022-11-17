@@ -2,7 +2,7 @@ import React, { useEffect, useState, useContext } from 'react'
 import { PlayerCard } from '../../Components'
 import { NavLink, useNavigate, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { loadData } from '../../Actions';
+import { loadData, leaveRoom } from '../../Actions';
 import './style.css'
 
 import { SocketContext } from '../../App';
@@ -12,10 +12,8 @@ export default function Lobby() {
   const { code } = useParams()
   const [localStorage, setLocalStorage] = useState(null)
 
-  const username = useSelector(state => state.username)
-  const icon = useSelector(state => state.icon)
+  const user = useSelector(state => state)
   const room = useSelector(state => state.room)
-  const isHost = useSelector(state => state.isHost)
 
   const dispatch = useDispatch()
   const navigate = useNavigate()
@@ -46,23 +44,27 @@ export default function Lobby() {
     alert("Copied the text: " + window.location.href);
   }
 
-  function startGame(){
+  function startGameHandler(){
     socket.emit('startGame')
     // navigate("/game")
     console.log("startgame function")
   }
 
+  function leaveRoomHandler(){
+    socket.emit('leave-current-room', code)
+    dispatch(leaveRoom())
+    navigate('/')
+  }
+
   return (room.code === code) ? (
   // return (
     <div className='Lobby '>
-  {/* // return (code === room.code || localStorage?.room.code === code) ? (
-  // return ( */}
         <div className="lobbySettings nes-container is-centered">
           <div>Room {code} <br></br>({room.host} is host) <hr></hr></div>
             <button onClick={copyToClipBoard}>Copy Room Link</button>
           <div className="nes-select">
             <label>Choose Pokemon Generation:</label>
-          <select id="default_select" disabled={!isHost}>
+          <select id="default_select" disabled={!user.isHost}>
             <option>All</option>
             <option>1</option>
             <option>2</option>
@@ -78,13 +80,14 @@ export default function Lobby() {
 
         <div >
           <label>Number of rounds?:</label>
-          <input type="number" defaultValue={10} min='1' max='10' disabled={!isHost}></input>
+          <input type="number" defaultValue={10} min='1' max='10' disabled={!user.isHost}></input>
         </div>
-        { isHost ?
-          <input type="button" value="START GAME" className="nes-btn is-error" onClick={startGame}></input>
+        { user.isHost ?
+          <input type="button" value="START GAME" className="nes-btn is-error" onClick={startGameHandler}></input>
           :
           <p>Waiting for host to start game</p>
         }
+        <button className='nes-btn' onClick={leaveRoomHandler}>Leave</button>
         
       </div>
       {/* <NavLink to="/game" className="nes-btn is-error">START GAME</NavLink>  */}
@@ -93,7 +96,7 @@ export default function Lobby() {
 
         <div>
           <h3>You</h3>
-          <PlayerCard name={username} icon={icon}/>
+          <PlayerCard name={user.name} icon={user.icon}/>
         </div>
 
         {
