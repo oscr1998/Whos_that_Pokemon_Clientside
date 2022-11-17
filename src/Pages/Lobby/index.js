@@ -45,9 +45,9 @@ export default function Lobby() {
   }
 
   function startGameHandler(){
-    socket.emit('startGame')
+    console.log("startgame function", code)
+    socket.emit('start-game', code)
     // navigate("/game")
-    console.log("startgame function")
   }
 
   function leaveRoomHandler(){
@@ -100,7 +100,7 @@ export default function Lobby() {
         </div>
 
         {
-          room.users.map(user => <PlayerCard key={user.name} name={user.name} icon={user.icon}/>)
+          room.users.map(user => {<PlayerCard key={user.name} name={user.name} icon={user.icon}/>})
         }
         
       </div>

@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { NavLink, useNavigate } from 'react-router-dom';
-import { setName, setIcon, createRoom, joinRoom, leaveRoom } from '../../Actions';
+import { setName, setIcon, createRoom, joinRoom, leaveRoom, addUser } from '../../Actions';
 import { SocketContext } from '../../App';
 
 import './style.css'
@@ -72,7 +72,10 @@ export default function Home() {
 
     const data = getFormData(e.target)
 
-    socket.emit('join-existing-room', { code: data.code, name: data.name })
+    dispatch(setName(username))
+    dispatch(setIcon(getRandomIcon()))
+
+    socket.emit('join-existing-room', { room: data.code, name: username })
   }
 
   return (
