@@ -31,7 +31,7 @@ export default function Chat() {
             </div>
 
             <div className='chatElement convo'>
-                <p>test</p>
+                <p></p>
             </div>
             
         </div>
