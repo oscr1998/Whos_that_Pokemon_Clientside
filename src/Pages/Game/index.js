@@ -10,6 +10,8 @@ import { useNavigate, useParams } from "react-router-dom";
 
 import incorrectMP3 from '../../Components/MusicPlayer/Sound/SFX/Mario_Fail.mp3'
 import correctMP3 from '../../Components/MusicPlayer/Sound/SFX/Pokemon_Item_Correct.mp3'
+import WhosThat from '../../Components/MusicPlayer/Sound/SFX/Whos_That_Pokemon.mp3'
+import Pokeball from '../../Components/MusicPlayer/Sound/SFX/Pokemon_Pokeball.mp3'
 
 import { SocketContext } from '../../App';
 
@@ -81,6 +83,7 @@ async function fetchWrongPokemon(i) {
   }
 }
 
+
 //generate question
 useEffect(() => {
   socket.emit('pokemon-select', { num: randomNumber, room: room.code})
@@ -90,9 +93,15 @@ useEffect(() => {
   title.style.height= "60px"
   title.style.width= "500px"
   title.style.marginTop= "20px"
+  // const whosMP3 = new Audio(WhosThat)
+  // whosMP3.volume = 0.1
+  // whosMP3.play()
 }, [numOfRounds])
 
 useEffect(() => {
+  const whosMP3 = new Audio(WhosThat)
+  whosMP3.volume = 0.1
+  whosMP3.play()
   fetchWrongPokemon(gen)
 }, [spriteName])
 
@@ -187,6 +196,9 @@ useEffect(() => {
             button4.disabled = true;
             let answerbox = document.getElementById("parent")
             answerbox.style.display= "none"
+            const showPoke = new Audio(Pokeball)
+            showPoke.volume = 0.1
+            showPoke.play()
             }
 
         if(roundTimer === -3){
