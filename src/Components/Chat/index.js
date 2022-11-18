@@ -9,8 +9,7 @@ export default function Chat() {
     useEffect(() => {
         socket.on('new-message', ({ user, msg }) =>{
             // console.log(`${JSON.stringify(user.name)}: ${msg}`)
-            if(user.name)
-                setMessages(prev => [...prev, {sender: user.name, text: msg}])
+            setMessages(prev => [...prev, {sender: user.name || 'Anonymous', text: msg}])
         })
 
         return () => {
