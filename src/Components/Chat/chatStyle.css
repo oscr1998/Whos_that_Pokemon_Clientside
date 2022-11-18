@@ -63,4 +63,6 @@
 
 .convo{
     color: #bdf573;
+    max-height: 200px;
+    overflow: auto;
 }

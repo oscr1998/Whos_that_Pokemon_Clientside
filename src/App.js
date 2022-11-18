@@ -3,7 +3,9 @@ import { useDispatch } from 'react-redux';
 import { Routes, Route, useNavigate } from 'react-router-dom'
 import io from "socket.io-client"
 
+
 import { addUser, createRoom, joinRoom, leaveRoom, updateUser, setGen, setPoke, setNumRounds } from './Actions';
+
 
 import { Home, Leaderboard, Lobby, Game, NotFound, Winner } from './Pages'
 import pokeball from './Components/images/pokeball.svg'
@@ -78,10 +80,6 @@ export default function App() {
     socket.on('updated-score', ({ user }) =>{
       console.log(`Update ${user.name}'s score to ${user.score}`)
       dispatch(updateUser(user))
-    })
-
-    socket.on('new-message', ({ user, msg }) =>{
-      console.log(`${JSON.stringify(user.name)}: ${msg}`)
     })
 
     socket.on('setting-generation', ({gen}) =>{

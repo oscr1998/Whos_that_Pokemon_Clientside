@@ -1,9 +1,22 @@
-import React, { useContext, useEffect } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { SocketContext } from '../../App';
 import './chatStyle.css'
 
 export default function Chat() {
     const socket = useContext(SocketContext)
+    const [messages, setMessages] = useState([])
+
+    useEffect(() => {
+        socket.on('new-message', ({ user, msg }) =>{
+            // console.log(`${JSON.stringify(user.name)}: ${msg}`)
+            if(user.name)
+                setMessages(prev => [...prev, {sender: user.name, text: msg}])
+        })
+
+        return () => {
+            socket.off('new-message')
+        }
+    }, [])
 
     function sendChatMessage (e) {
         e.preventDefault()
@@ -31,7 +44,7 @@ export default function Chat() {
             </div>
 
             <div className='chatElement convo'>
-                <p></p>
+                {messages.map((msg, index) => <p key={index}>{msg.sender}: {msg.text}</p>)}
             </div>
             
         </div>
