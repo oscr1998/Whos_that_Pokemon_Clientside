@@ -14,6 +14,8 @@ export default function Lobby() {
 
   const user = useSelector(state => state)
   const room = useSelector(state => state.room)
+  const gameGen = useSelector(state => state.gameGen)
+  const numRounds = useSelector(state => state.numRounds)
 
   const dispatch = useDispatch()
   const navigate = useNavigate()
@@ -71,7 +73,7 @@ export default function Lobby() {
             <button onClick={copyToClipBoard}>Copy Room Code</button>
           <div className="nes-select">
             <label>Choose Pokemon Generation:</label>
-          <select id="default_select" disabled={!user.isHost} onChange={selectGeneration}>
+          <select id="default_select" disabled={!user.isHost} onChange={selectGeneration} value={gameGen}>
             <option>All</option>
             <option>1</option>
             <option>2</option>
@@ -87,7 +89,7 @@ export default function Lobby() {
 
         <div >
           <label>Number of rounds?:</label>
-          <input type="number" defaultValue={10} min='1' max='10' disabled={!user.isHost} onChange={selectNumRounds}></input>
+          <input type="number" min='1' max='10' disabled={!user.isHost} onChange={selectNumRounds} value={numRounds}></input>
         </div>
         { user.isHost ?
           <input type="button" value="START GAME" className="nes-btn is-error" onClick={startGameHandler}></input>

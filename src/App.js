@@ -1,11 +1,9 @@
 import React, { createContext, useEffect, useState } from 'react'
-import { useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux'
 import { Routes, Route, useNavigate } from 'react-router-dom'
 import io from "socket.io-client"
 
-
-import { addUser, createRoom, joinRoom, leaveRoom, updateUser, setGen, setPoke, setNumRounds } from './Actions';
-
+import { addUser, createRoom, joinRoom, leaveRoom, updateUser, setGen, setPoke, setNumRounds } from './Actions'
 
 import { Home, Leaderboard, Lobby, Game, NotFound, Winner } from './Pages'
 import pokeball from './Components/images/pokeball.svg'
@@ -15,7 +13,7 @@ import './App.css'
 import MusicPlayer from './Components/MusicPlayer/index.js'
 import { Chat } from './Components';
 
-const serverEndpoint = "http://localhost:5001"
+const serverEndpoint = "https://kakunamatata.herokuapp.com/"
 const socket = io(serverEndpoint)
 
 export const SocketContext = createContext(socket)
