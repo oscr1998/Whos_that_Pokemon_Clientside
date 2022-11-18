@@ -6,6 +6,9 @@ import { NavLink } from 'react-router-dom';
 import Champion from '../../Components/MusicPlayer/champion';
 
 export default function Winner() {
+  
+  const room = useSelector(state => state.room)
+  
   const users = useSelector(state => state.room.users)
   // const data = useSelector(state => state)
   // let array = data.room.users
@@ -99,8 +102,10 @@ export default function Winner() {
     <br/>
 
       <div className='btnDiv'>
-        <button className='nes-btn  winBtn'>Back to Lobby?</button>
-        <button className='nes-btn  winBtn'>Play again?</button>
+        <NavLink to="/game" className="nes-btn is-warning leaderBtn">Play Again</NavLink>
+        <NavLink to={`/rooms/${room.code}`} className="nes-btn is-warning leaderBtn">Back to Looby</NavLink>
+        {/* <button className='nes-btn  winBtn' onClick={() => navigate("/leaderboard")}>Back to Lobby?</button>
+        <button className='nes-btn  winBtn' onClick={() => navigate(-1)}>Play again?</button> */}
       </div>
     </div>
   )

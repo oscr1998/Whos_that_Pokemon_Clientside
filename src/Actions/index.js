@@ -28,6 +28,9 @@ export const setScore = (score) => ({ type: "SET_SCORE", payload: score})
 // PICK GEN
 export const setGen = (gen) => ({ type: "PICK_GEN", payload: gen})
 
+// PICK NUM ROUNDS
+export const setNumRounds = (num) => ({ type: "PICK_NUM_ROUNDS", payload: num})
+
 // PICK Poke
 export const setPoke = (poke) => ({ type: "PICK_POKE", payload: poke})
 

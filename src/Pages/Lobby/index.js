@@ -2,7 +2,7 @@ import React, { useEffect, useState, useContext } from 'react'
 import { PlayerCard } from '../../Components'
 import { NavLink, useNavigate, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { loadData, leaveRoom, setGen } from '../../Actions';
+import { loadData, leaveRoom, setGen, setNumRounds } from '../../Actions';
 import './style.css'
 
 import { SocketContext } from '../../App';
@@ -58,6 +58,11 @@ export default function Lobby() {
     socket.emit('set-generation', { gen: e.target.value, room: code})
   }
 
+  function selectNumRounds(e){
+    dispatch(setNumRounds(e.target.value))
+    socket.emit('set-num-rounds', { numRounds: e.target.value, room: code})
+  }
+
   return (room.code === code) ? (
   // return (
     <div className='Lobby '>
@@ -82,7 +87,7 @@ export default function Lobby() {
 
         <div >
           <label>Number of rounds?:</label>
-          <input type="number" defaultValue={10} min='1' max='10' disabled={!user.isHost}></input>
+          <input type="number" defaultValue={10} min='1' max='10' disabled={!user.isHost} onChange={selectNumRounds}></input>
         </div>
         { user.isHost ?
           <input type="button" value="START GAME" className="nes-btn is-error" onClick={startGameHandler}></input>

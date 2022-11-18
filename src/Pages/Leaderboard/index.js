@@ -57,7 +57,7 @@ export default function Leaderboard() {
       </div>
       <br/>
       <br/>
-      <button className="nes-btn is-primary" onClick={() => navigate(-1)}>Back to Previous</button>
+      <button className="nes-btn is-primary" onClick={() => navigate(-1)}>Back</button>
     </div>
 
   )
