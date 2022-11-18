@@ -35,8 +35,8 @@ Once installed, run the following commands with `npm run`. For example, to run t
 * `test` - Run all tests
 ### Cypress Testing
 * `cy:open` - Opens Cypress to manually assess tests
-* `cy:run` - Runs Cypress end to end (e2e) tests
-* `cy:c` - Runs Cypress Component testing and returns results to the console. Main method for testing.
+* `cy:run` - Runs Cypress end to end (e2e) tests. Main method for testing.
+* `cy:c` - Runs Cypress Component testing and returns results to the console.
 * `pikachu` - Attempt to run coverage tests.
 
 ## Technologies Used
