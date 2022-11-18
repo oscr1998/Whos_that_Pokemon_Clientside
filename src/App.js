@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux';
 import { Routes, Route, useNavigate } from 'react-router-dom'
 import io from "socket.io-client"
 
-import { addUser, createRoom, joinRoom, leaveRoom, updateUser, setGen, setPoke } from './Actions';
+import { addUser, createRoom, joinRoom, leaveRoom, updateUser, setGen, setPoke } from './Actions'
 
 import { Home, Leaderboard, Lobby, Game, NotFound, Winner } from './Pages'
 import pokeball from './Components/images/pokeball.svg'
