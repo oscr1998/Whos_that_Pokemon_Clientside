@@ -6,10 +6,4 @@ describe('Netlify App', () => {
   it('Retrieves data from Netlify App', () => {
     cy.get('body')
   })
-
-  it('Has Pokeballs ascending', () => {
-    cy.get('.circlesContainer')
-    cy.get('.form2 > form > :nth-child(1)')
-  })
-
 })
