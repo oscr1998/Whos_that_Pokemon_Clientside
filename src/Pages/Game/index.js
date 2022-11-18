@@ -5,7 +5,7 @@ import './style.css'
 
 
 import { useDispatch, useSelector } from 'react-redux';
-import { setScore } from '../../Actions';
+import { sendScore } from '../../Actions';
 import { useNavigate, useParams } from "react-router-dom";
 
 import incorrectMP3 from '../../Components/MusicPlayer/Sound/SFX/Mario_Fail.mp3'
@@ -27,6 +27,7 @@ export default function Game() {
   const user = useSelector(state => state)
   const room = useSelector(state => state.room)
   const score = useSelector(state => state.score)
+  const numRounds = useSelector(state => state.numRounds)
 
   const dispatch = useDispatch()
   const navigate = useNavigate()
@@ -61,7 +62,12 @@ if(gen === "All"){
 }
 // start round
 async function fetchWrongPokemon(i) {
-    const fetchApi = `https://kakunamatata.herokuapp.com/pokemon/gen/${i}`
+  let fetchApi
+    if (gen === "All") {
+      fetchApi = "https://kakunamatata.herokuapp.com/pokemon/gen/1-8"
+    } else {
+      fetchApi = `https://kakunamatata.herokuapp.com/pokemon/gen/${i}`
+    }
     try {
     const apiData = await axios.get(fetchApi);
     let {data} = await apiData
@@ -82,6 +88,26 @@ async function fetchWrongPokemon(i) {
     console.log("FAIL FAIL");
   }
 }
+
+// these two useEffects were 1 but i split them to enforce selection of pokemon is done after a new randomNumber is sent/ recieved
+// useEffect(() => {
+//   if (user.isHost) {
+//     socket.emit('pokemon-select', { num: randomNumber, room: room.code})
+//   }
+// }, [numOfRounds])
+
+// //generate question
+// useEffect(() => {
+//   console.log("pokeNum", pokeNum)
+//   fetchCorrectPokemon(randomNumber)
+//   let title = document.getElementById("pokeTitle")
+//   title.style.height= "60px"
+//   title.style.width= "500px"
+//   title.style.marginTop= "20px"
+//   // const whosMP3 = new Audio(WhosThat)
+//   // whosMP3.volume = 0.1
+//   // whosMP3.play()
+// }, [randomNumber]) 
 
 //generate question
 useEffect(() => {
@@ -170,7 +196,7 @@ function randomize(arr) {
 // game starts on load
 // pokemon sprite and wrong answers generated on load
 let roundTimer = 5;
-let rounds = 10
+let rounds = numRounds
 let possibleAnswers = [spriteName, wrongChoice1, wrongChoice2, wrongChoice3]
 randomize(possibleAnswers)
 
@@ -200,7 +226,7 @@ useEffect(() => {
             showPoke.play()
             }
 
-        if(roundTimer === -3){
+        if(roundTimer === -2){
           roundTimer = 5
           rounds -= 1
           // console.log("roundNum in timer:", rounds)

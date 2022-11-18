@@ -5,16 +5,16 @@ export default function Timer() {
   const [time, setTime] = useState();
   const [timeGuess, setTimeGuess] = useState();
 
-var timeleft = 8;
+var timeleft = 7
   useEffect(()=>{
-    setTime(8)
+    setTime(7)
     let quizTimer = setInterval(function(){
       setTime(prev => prev-1);
       timeleft -= 1
       console.log(timeleft)
       if(timeleft=== 0){
-        setTime(8)
-        timeleft = 8
+        setTime(7)
+        timeleft = 7
         console.log("please")
       }
     }, 1000)
@@ -27,7 +27,7 @@ var timeToGuess = 5
     let guessTimer = setInterval(function(){
       timeToGuess -= 1
       setTimeGuess(prev => prev-1)
-      if(timeToGuess===-3){
+      if(timeToGuess===-2){
         setTimeGuess(5)
         timeToGuess = 5
       }

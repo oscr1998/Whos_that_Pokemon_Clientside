@@ -3,7 +3,9 @@ import { useDispatch } from 'react-redux';
 import { Routes, Route, useNavigate } from 'react-router-dom'
 import io from "socket.io-client"
 
-import { addUser, createRoom, joinRoom, leaveRoom, updateUser, setGen, setPoke } from './Actions'
+
+import { addUser, createRoom, joinRoom, leaveRoom, updateUser, setGen, setPoke, setNumRounds } from './Actions';
+
 
 import { Home, Leaderboard, Lobby, Game, NotFound, Winner } from './Pages'
 import pokeball from './Components/images/pokeball.svg'
@@ -13,7 +15,7 @@ import './App.css'
 import MusicPlayer from './Components/MusicPlayer/index.js'
 import { Chat } from './Components';
 
-const serverEndpoint = "https://kakunamatata.herokuapp.com"
+const serverEndpoint = "http://localhost:5001"
 const socket = io(serverEndpoint)
 
 export const SocketContext = createContext(socket)
@@ -88,6 +90,11 @@ export default function App() {
     socket.on('setting-pokemon', ({num}) =>{
       console.log("set poke:", num)
       dispatch(setPoke(num))
+    })
+
+    socket.on('setting-num-rounds', ({numRounds}) =>{
+      console.log("set rounds:", numRounds)
+      dispatch(setNumRounds(numRounds))
     })
 
     return () => {
