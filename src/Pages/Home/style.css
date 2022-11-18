@@ -11,6 +11,7 @@
     margin-right: 35%;
     padding: 4rem 4rem;
     flex-direction: column;
+    max-height: 585px;
 }
 
 .createRoom{
