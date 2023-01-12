@@ -125,7 +125,7 @@ useEffect(() => {
 
 useEffect(() => {
   const whosMP3 = new Audio(WhosThat)
-  whosMP3.volume = 0.1
+  whosMP3.volume = 0.02
   whosMP3.play()
   fetchWrongPokemon(gen)
 }, [spriteName])
@@ -165,7 +165,7 @@ function checkAnswer(e){
     let answerbox = document.getElementById("parent")
     answerbox.style.display= "none"
     const correct = new Audio(correctMP3)
-    correct.volume = 0.1
+    correct.volume = 0.02
     correct.play()
   } else{
     let button = document.getElementById(e.target.id)
@@ -177,7 +177,7 @@ function checkAnswer(e){
     let answerbox = document.getElementById("parent")
     answerbox.style.display= "none"
     const incorrect = new Audio(incorrectMP3)
-    incorrect.volume = 0.1
+    incorrect.volume = 0.02
     incorrect.play()
   }
   // console.log(score)
@@ -222,7 +222,7 @@ useEffect(() => {
             let answerbox = document.getElementById("parent")
             answerbox.style.display= "none"
             const showPoke = new Audio(Pokeball)
-            showPoke.volume = 0.1
+            showPoke.volume = 0.02
             showPoke.play()
             }
 
