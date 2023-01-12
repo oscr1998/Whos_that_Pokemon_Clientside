@@ -2,9 +2,7 @@
 ## Who's that Pokemon? - a React based, Quiz app
 #### Sean, Kornelia, Ami, Oli, && Peter
 
-![](./media/Hamilton.png)
-
-We were tasked with creating a multiplayer online quiz game, using React. We decided to do a "Who's that Pokemon?" quiz, as Pokemon have been a recurring theme for most of our classes, and because they're neat.
+A multiplayer online "Who's that Pokemon?" quiz game
 
 ## Project Brief
 #### Our website should have the following functionality for users:
@@ -19,10 +17,6 @@ We were tasked with creating a multiplayer online quiz game, using React. We dec
 - A small API connected to a database of scores.
 - Make use of an open API such as [Open Trivia DB](https://opentdb.com/api_config.php).
 - Minimum 60% test coverage with an aim of 80%.
-
-## Game Instructions
-* Open browser
-* Guess Pokemon
 
 ## Development Instructions
 Install packages with `npm install`
@@ -40,23 +34,21 @@ Once installed, run the following commands with `npm run`. For example, to run t
 * `pikachu` - Attempt to run coverage tests.
 
 ## Technologies Used
-* Computers
-* React
-* Pokeballs
+| **Frontend** | **Backend**        | **Both**   | 
+|:------------:|:------------------:|:----------:|
+| HTML         | MongoDB            | Javascript |
+| CSS          | Express            | Github     | 
+| REACT        | Cors               | Socket\.io |
+| Redux        | Render             | Node\.js   |
+| Netlify      |                    | Slack      |
+|              |                    |            |
+
 
 ## Testing
 * Coverage:
 
 ![](./media/wtpq-testCoverage.png)
 
-## Wins & Challenges
-
-### Wins
-* Pokeballs
-
-### Challenges
-* Hammer Guy
-* Socket.io
 
 ## Links
 * [Who's That Pokemon?](https://kakuna-matata.netlify.app) - The App hosted on netlify

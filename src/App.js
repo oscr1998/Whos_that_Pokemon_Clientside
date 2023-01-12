@@ -13,7 +13,7 @@ import './App.css'
 import MusicPlayer from './Components/MusicPlayer/index.js'
 import { Chat } from './Components';
 
-const serverEndpoint = "https://kakunamatata.herokuapp.com/"
+const serverEndpoint = "https://whos-that-pokemon-server.onrender.com/"
 const socket = io(serverEndpoint)
 
 export const SocketContext = createContext(socket)
