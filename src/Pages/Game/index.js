@@ -37,9 +37,9 @@ export default function Game() {
   const pokeNum = useSelector(state => state.pickPoke)
 
   async function fetchCorrectPokemon(i) {
-    const fetchApi = `https://kakunamatata.herokuapp.com/pokemon/${i}`
+    const fetchApi = `https://whos-that-pokemon-server.onrender.com/pokemon/${i}`
     try {
-      console.log(`https://kakunamatata.herokuapp.com/pokemon/${i}`)
+      console.log(`https://whos-that-pokemon-server.onrender.com/pokemon/${i}`)
         const apiData = await axios.get(fetchApi);
         const dataImage = await apiData.data.image
         const dataName = await apiData.data.name
@@ -64,9 +64,9 @@ if(gen === "All"){
 async function fetchWrongPokemon(i) {
   let fetchApi
     if (gen === "All") {
-      fetchApi = "https://kakunamatata.herokuapp.com/pokemon/gen/1-8"
+      fetchApi = "https://whos-that-pokemon-server.onrender.com/pokemon/gen/1-8"
     } else {
-      fetchApi = `https://kakunamatata.herokuapp.com/pokemon/gen/${i}`
+      fetchApi = `https://whos-that-pokemon-server.onrender.com/pokemon/gen/${i}`
     }
     try {
     const apiData = await axios.get(fetchApi);
