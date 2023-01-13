@@ -3,7 +3,7 @@
 
 https://user-images.githubusercontent.com/104166937/212287983-e7f9e795-d033-44f1-8810-71a1f6f1d085.mp4
 
-#### Sean, Kornelia, Ami, Oli, && Peter
+#### Sean, Kornelia, Ami, Oliver, & Peter
 
 A multiplayer online "Who's that Pokemon?" quiz game
 
